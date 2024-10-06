@@ -82,10 +82,10 @@ Inclua aqui as imagens dos wireframes ou mockups das principais telas da aplica�
 <h2>👨‍💻 Desenvolvedores</h2>
 
 <h3>Equipe Dev</h3>
-Luis Henrique dos Santos Abrantes
-Isaque Estolano de Souza
-Cauã Almeida Moura
+Luis Henrique dos Santos Abrantes <break>
+Isaque Estolano de Souza<break>
+Cauã Almeida Moura<break>
 
 <h3>Equipe Administrativa</h3>
-Luiz Fernando Paiva Borges
+Luiz Fernando Paiva Borges<break>
 Amanda Nunes do Prado

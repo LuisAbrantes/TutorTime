@@ -1,4 +1,4 @@
-<h1 align="center">TutorTime</h1>
+<h1 align="center">TutorTime 🎓</h1>
 
 <p align="center">Um trabalho para a disciplina de Desenvolvimento de Aplicações com Banco de Dados - 3º Informática do IFSP-Jacareí.</p>
 
@@ -62,7 +62,7 @@ Diagrama de Arquitetura
 
 Inclua aqui a imagem do diagrama de arquitetura da aplicação.
 
-<h2>💻Tecnologias Utilizadas</h2>
+<h2>⚛Tecnologias Utilizadas</h2>
 
 	•	Frontend: React
 	•	Backend: Node.js, Express

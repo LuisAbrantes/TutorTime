@@ -41,7 +41,7 @@ Estudantes e monitores da instituição que buscam um meio eficiente de gerencia
 	•	Consulta de Horários: Alunos podem visualizar horários disponíveis por disciplina ou monitor.
 
 <h3>Requisitos Não Funcionais</h3>
-
+  
 	•	Desempenho: O sistema deve responder às ações do usuário em até 2 segundos.
 	•	Segurança: Dados pessoais devem ser protegidos e armazenados de forma segura.
 	•	Usabilidade: A interface deve ser intuitiva e fácil de usar.
@@ -86,5 +86,5 @@ Imagens dos wireframes ou mockups das principais telas da aplicação.
 
 <h3>Equipe Dev</h3>
 
-| [<img loading="lazy" src="./imagens/IMG_5405.jpeg" width=115><br><sub>Luis Henrique dos Santos Abrantes</sub>](https://github.com/LuisAbrantes) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/149614643?v=4" width=115><br><sub>Isaque Estolano de Souza</sub>](https://github.com/IsaquePy) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/102776070?v=4" width=115><br><sub>Cauã Almeida Moura</sub>](https://github.com/cauaalmeida14052007) |
+| [<img loading="lazy" src="./imagens_profile/IMG_5405.jpeg" width=115><br><sub>Luis Henrique dos Santos Abrantes</sub>](https://github.com/LuisAbrantes) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/149614643?v=4" width=115><br><sub>Isaque Estolano de Souza</sub>](https://github.com/IsaquePy) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/102776070?v=4" width=115><br><sub>Cauã Almeida Moura</sub>](https://github.com/cauaalmeida14052007) |
 | :---: | :---: | :---: |

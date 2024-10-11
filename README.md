@@ -26,7 +26,7 @@ Descrever aqui o que o TutorTime faz e quais são suas funcionalidades principai
 <h2>✖️ Escopo (O que não é o objetivo do projeto)</h2>
 
 	•	Pagamento Online: Não haverá integração com sistemas de pagamento.
-	•	Aulas Online Integradas: O sistema não fornecerá uma plataforma para aulas online (ex.: videochamadas).
+	•	Aulas Online Integradas: O sistema não fornecerá uma plataforma para aulas separadas por tema na sua primeira versão.
 
 <h2>👥 Público-Alvo</h2>
 
@@ -50,31 +50,31 @@ Estudantes e monitores da instituição que buscam um meio eficiente de gerencia
 
 <h3>Diagrama ER</h3>
 
-Inclua aqui a imagem do seu diagrama ER.
+Imagem do diagrama ER.
 
 <h3>Definição das Tabelas</h3>
 
-Liste aqui as tabelas, campos, tipos de dados e restrições.
+Liste das tabelas, campos, tipos de dados e restrições.
 
 <h2>🛠️ Arquitetura da Aplicação</h2>
 
 Diagrama de Arquitetura
 
-Inclua aqui a imagem do diagrama de arquitetura da aplicação.
+Imagem do diagrama de arquitetura da aplicação.
 
 <h2>⚛Tecnologias Utilizadas</h2>
 
 	•	Frontend: React
 	•	Backend: Node.js, Express
 	•	Banco de Dados: MySQL Workbanch
-	•	Outras: Bibliotecas e frameworks adicionais que você está usando.
+	•	Outras: Bibliotecas e frameworks adicionais - serão adicionados na medida que forem usados.
 
 
 <h2>🎨 Design da Interface do Usuário</h2>
 
 <h3>Wireframes ou Mockups</h3>
 
-Inclua aqui as imagens dos wireframes ou mockups das principais telas da aplicação.
+Imagens dos wireframes ou mockups das principais telas da aplicação.
 
 <h3>Descrição das Funcionalidades</h3>
 
@@ -85,7 +85,6 @@ Inclua aqui as imagens dos wireframes ou mockups das principais telas da aplica�
 <h2>👨‍💻 Desenvolvedores</h2>
 
 <h3>Equipe Dev</h3>
-Luis Henrique dos Santos Abrantes	Isaque Estolano de Souza	Cauã Almeida Moura
 
-<h3>Equipe Administrativa</h3>
-Luiz Fernando Paiva Borges      Amanda Nunes do Prado
+| [<img loading="lazy" src="./imagens/IMG_5405.jpeg" width=115><br><sub>Luis Henrique dos Santos Abrantes</sub>](https://github.com/LuisAbrantes) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/149614643?v=4" width=115><br><sub>Isaque Estolano de Souza</sub>](https://github.com/IsaquePy) |  [<img loading="lazy" src="https://avatars.githubusercontent.com/u/102776070?v=4" width=115><br><sub>Cauã Almeida Moura</sub>](https://github.com/cauaalmeida14052007) |
+| :---: | :---: | :---: |

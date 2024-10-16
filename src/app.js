@@ -1,39 +1,61 @@
-const track = document.getElementById('image-track');
+let items = document.querySelectorAll('.slider .list .item');
+let next = document.getElementById('next');
+let prev = document.getElementById('prev');
+let thumbnails = document.querySelectorAll('.thumbnail .item');
 
-window.onmousedown = e => {
-    track.dataset.mouseDownAt = e.clientX;
+// config param
+let countItem = items.length;
+let itemActive = 0;
+// event next click
+next.onclick = function(){
+    itemActive = itemActive + 1;
+    if(itemActive >= countItem){
+        itemActive = 0;
+    }
+    showSlider();
 }
-
-window.onmouseup = e => {
-    track.dataset.mouseDownAt = "0";
-    track.dataset.prevPercentage = track.dataset.percentage;
+//event prev click
+prev.onclick = function(){
+    itemActive = itemActive - 1;
+    if(itemActive < 0){
+        itemActive = countItem - 1;
+    }
+    showSlider();
 }
+// auto run slider
+let refreshInterval = setInterval(() => {
+    next.click();
+}, 5000)
+function showSlider(){
+    // remove item active old
+    let itemActiveOld = document.querySelector('.slider .list .item.active');
+    let thumbnailActiveOld = document.querySelector('.thumbnail .item.active');
+    itemActiveOld.classList.remove('active');
+    thumbnailActiveOld.classList.remove('active');
 
-window.onmousemove = e => {
-    if (track.dataset.mouseDownAt === "0") return;
+    // active new item
+    items[itemActive].classList.add('active');
+    thumbnails[itemActive].classList.add('active');
+    setPositionThumbnail();
 
-    const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
-        maxDelta = window.innerWidth / 2;
-
-    const percentage = (mouseDelta / maxDelta) * -100,
-        nextPercentage = parseFloat(track.dataset.prevPercentage) + percentage;
-        
-    const limitedNextPercentage = Math.max(Math.min(nextPercentage, 0), -100);
-
-    track.dataset.percentage = limitedNextPercentage;
-
-    track.animate({
-        transform: `translate(${limitedNextPercentage}%, -50%)`
-    }, {duration: 1200, fill: "forwards"});
-
-    for(const image of track.getElementsByClassName("image")){
-        image.animate({
-            objectPosition: `${100 + limitedNextPercentage}% center`
-        }, {duration: 1200, fill: "forwards"});
+    // clear auto time run slider
+    clearInterval(refreshInterval);
+    refreshInterval = setInterval(() => {
+        next.click();
+    }, 5000)
+}
+function setPositionThumbnail () {
+    let thumbnailActive = document.querySelector('.thumbnail .item.active');
+    let rect = thumbnailActive.getBoundingClientRect();
+    if (rect.left < 0 || rect.right > window.innerWidth) {
+        thumbnailActive.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
     }
 }
 
-document.onmouseleave = () => {
-    track.dataset.mouseDownAt = "0";
-    track.dataset.prevPercentage = track.dataset.percentage || "0";
-}
+// click thumbnail
+thumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', () => {
+        itemActive = index;
+        showSlider();
+    })
+})

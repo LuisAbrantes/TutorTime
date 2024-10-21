@@ -175,3 +175,60 @@ a{
     color: #eee;
 }
 
+/* Estilo para o formulário e botão */
+#newSubjectForm {
+    position: fixed;
+    top: 50px; /* Ajuste para não sobrepor o botão */
+    right: 10px;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#newSubjectForm input {
+    margin-bottom: 5px;
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#newSubjectForm button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+#newSubjectForm button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo para o botão de adicionar matéria */
+#toggleFormButton {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #6a5acd; /* Cor azul/roxo */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif; /* Mesma fonte do site */
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#toggleFormButton:hover {
+    background-color: #483d8b; /* Cor mais escura para hover */
+    transform: scale(1.05); /* Efeito de leve aumento ao passar o mouse */
+}

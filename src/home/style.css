@@ -11,6 +11,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap; /* Permite que os itens do cabeçalho se ajustem em várias linhas */
     width: 100%;
     max-width: 1200px;
     margin: auto;
@@ -39,6 +40,7 @@ header {
     margin: 0;
     justify-content: center;
     flex-grow: 1;
+    flex-wrap: wrap; /* Permite que os itens do menu se ajustem em várias linhas */
 }
 
 .menu li {
@@ -276,6 +278,23 @@ p {
     .description {
         text-align: center;
     }
+
+    .menu {
+        flex-direction: column; /* Alinha os itens do menu verticalmente em telas menores */
+        align-items: center;
+    }
+
+    .menu li {
+        margin: 5px 0; /* Ajusta a margem entre os itens do menu */
+    }
+
+    header {
+        justify-content: center; /* Centraliza o conteúdo do cabeçalho */
+    }
+
+    #toggleFormButton {
+        width: 90%; /* Ajusta a largura do botão para caber melhor em telas menores */
+    }
 }
 
 a {
@@ -318,9 +337,8 @@ a {
 }
 
 #toggleFormButton {
-    position: fixed;
-    top: 10px;
-    right: 10px;
+    position: static; /* Remove a posição fixa para permitir que o botão se mova com o layout */
+    margin: 10px auto; /* Centraliza o botão */
     background-color: #6a5acd;
     color: white;
     border: none;

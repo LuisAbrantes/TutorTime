@@ -1,81 +1,105 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 body {
-    font-family: Poppins, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     background-color: #010101;
     color: #eee;
 }
 
-svg {
-    width: 25px;
-}
-
 header {
-    width: 1200px;
-    max-width: 90%;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 50px 1fr 50px;
-    grid-template-rows: 50px;
-    justify-content: center;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px 20px;
+    box-sizing: border-box;
     position: relative;
     z-index: 100;
 }
 
-header .logo {
-    font-weight: bold;
+.logo {
+    display: flex;
+    align-items: center;
 }
 
-header .menu {
+.imageLogo img {
+    width: 40px;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
     padding: 0;
     margin: 0;
-    list-style: none;
-    display: flex;
     justify-content: center;
-    gap: 20px;
-    font-weight: 500;
+    flex-grow: 1;
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 40px;
+.menu li {
+    margin: 0 10px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #eee;
+    padding: 10px 15px;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu li:hover {
+    background-color: #483d8b;
+    border-radius: 5px;
+    transform: scale(1.05);
+}
+
+h1, h2, h3 {
+    color: #fff;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
 .profile {
     display: flex;
     align-items: center;
     margin-bottom: 40px;
-    flex-wrap: wrap; /* Permite que os itens se ajustem em telas menores */
+    flex-wrap: wrap;
 }
 
 .profile-pic {
     border-radius: 50%;
     width: 150px;
-    height: auto; /* Ajusta a altura automaticamente para manter a proporção */
-    aspect-ratio: 1 / 1; /* Mantém a proporção 1:1 */
+    height: auto;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     margin: 0 20px;
-    flex-shrink: 0; /* Impede que a imagem encolha */
+    flex-shrink: 0;
 }
 
 .profile:nth-child(odd) {
-    flex-direction: row-reverse;
-    text-align: right;
-}
-
-.profile:nth-child(even) {
     flex-direction: row;
     text-align: left;
 }
 
-.description {
-    max-width: 600px;
-    flex: 1; /* Permite que a descrição ocupe o espaço restante */
+.profile:nth-child(even) {
+    flex-direction: row-reverse;
+    text-align: right;
 }
 
-/* css slider */
+.description {
+    max-width: 600px;
+    flex: 1;
+}
+
 .slider {
     height: 100vh;
     margin-top: -50px;
@@ -103,9 +127,7 @@ h1 {
     position: absolute;
     left: 0;
     bottom: 0;
-    background-image: linear-gradient(
-        to top, #000 40%, transparent
-    );
+    background-image: linear-gradient(to top, #000 40%, transparent);
 }
 
 .slider .list .item .content {
@@ -237,22 +259,22 @@ h1 {
 
 @media (max-width: 768px) {
     .profile {
-        flex-direction: column; /* Alinha os itens verticalmente em telas menores */
+        flex-direction: column;
         text-align: center;
     }
 
     .profile:nth-child(odd),
     .profile:nth-child(even) {
-        flex-direction: column; /* Alinha os itens verticalmente em telas menores */
+        flex-direction: column;
         text-align: center;
     }
 
     .profile-pic {
-        margin: 0 auto 20px; /* Centraliza a imagem e adiciona margem inferior */
+        margin: 0 auto 20px;
     }
 
     .description {
-        text-align: center; /* Centraliza o texto da descrição */
+        text-align: center;
     }
 }
 
@@ -260,3 +282,112 @@ a {
     color: #eee;
 }
 
+#newSubjectForm {
+    position: fixed;
+    top: 50px;
+    right: 10px;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#newSubjectForm input {
+    margin-bottom: 5px;
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#newSubjectForm button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+#newSubjectForm button:hover {
+    background-color: #45a049;
+}
+
+#toggleFormButton {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#toggleFormButton:hover {
+    background-color: #483d8b;
+    transform: scale(1.05);
+}
+
+.subject-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 5px;
+}
+
+.subject-item img {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.subject-item h2, .subject-item p {
+    margin: 0 10px;
+    color: #eee;
+}
+
+.subject-item button {
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.subject-item button:hover {
+    background-color: #483d8b;
+}
+
+#toggleFormButton, #newSubjectForm button {
+    display: block;
+    margin: 20px auto;
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#toggleFormButton:hover, #newSubjectForm button:hover {
+    background-color: #483d8b;
+    transform: scale(1.05);
+}

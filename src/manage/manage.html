@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Disciplinas - TutorTime</title>
+    <link rel="stylesheet" href="../home/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="imageLogo">
+                <img src="../images/logo.png" alt="Logo TutorTime">
+            </div>
+            TutorTime - IFSP
+        </div>
+        <ul class="menu">
+            <li><a href="../home/index.html">Home</a></li>
+            <li><a href="../about/about.html">About</a></li>
+            <li><a href="#">Manage</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <h1 style="text-align: center;">Gerenciar Disciplinas</h1>
+        <button id="toggleFormButton">Adicionar Nova Disciplina</button>
+        <form id="newSubjectForm" style="display: none;">
+            <input type="text" id="subjectName" placeholder="Nome da Disciplina" required>
+            <input type="file" id="subjectImageFile" accept="image/*">
+            <input type="text" id="subjectImageUrl" placeholder="URL da Imagem">
+            <input type="text" id="subjectCourses" placeholder="Cursos Sugeridos" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <div id="subjectList">
+            <!-- Lista de disciplinas será gerada aqui -->
+        </div>
+    </main>
+
+    <script src="manage.js"></script>
+</body>
+</html>

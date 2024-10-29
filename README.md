@@ -8,7 +8,7 @@
 <h2>👨‍🏫 Professores Responsáveis</h2>
 
 	•	Carlos Eduardo Duque Polito
-	•	Olavo Limpo de Matos Junior
+	•	Olavo Olímpio de Matos Junior
 
 <h2>🎯 Objetivo do Projeto</h2>
 

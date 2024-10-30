@@ -12,39 +12,46 @@
 
 <h2>🎯 Objetivo do Projeto</h2>
 
-Descrever aqui o que o TutorTime faz e quais são suas funcionalidades principais. Por exemplo:
-
-“O TutorTime é uma plataforma desenvolvida para facilitar o gerenciamento de monitorias acadêmicas, conectando alunos e monitores de forma simples e eficiente.”
+O TutorTime é uma plataforma web desenvolvida para facilitar o gerenciamento de monitorias acadêmicas no IFSP-Jacareí. O sistema permite que alunos encontrem monitorias disponíveis em diferentes disciplinas e que monitores gerenciem suas ofertas de monitoria de forma simples e eficiente, apresentando informações detalhadas sobre cada disciplina para os **alunos interessados**.
 
 <h2>🔨 Funcionalidades do Projeto</h2>
 
-	•	Registro de Monitores e Alunos: Cadastro de usuários no sistema.
-	•	Agendamento de Monitorias: Permitir que alunos se inscrevam em horários disponíveis.
-	•	Gerenciamento de Horários: Monitores podem definir e gerenciar seus horários de monitoria.
-	•	Notificações: Envio de lembretes sobre sessões agendadas.
+• Visualização de Monitorias: Interface com slider para apresentação das disciplinas disponíveis
+• Gerenciamento de Disciplinas: Adição, edição e remoção de disciplinas no sistema
+• Páginas Específicas: Cada disciplina possui sua própria página com informações detalhadas sobre a monitoria, sendo elas: Professor responsável, monitor responsável, dias e horários de monitoria, sala/link de acesso.
+• Interface Responsiva: Design adaptável para diferentes tamanhos de tela
+• Sistema de Navegação: Menu intuitivo para acesso às diferentes seções do site
 
 <h2>✖️ Escopo (O que não é o objetivo do projeto)</h2>
 
-	•	Pagamento Online: Não haverá integração com sistemas de pagamento.
-	•	Aulas Online Integradas: O sistema não fornecerá uma plataforma para aulas separadas por tema na sua primeira versão.
+• Sistema de Login/Autenticação: Não há sistema de login nesta versão
+• Chat Entre Usuários: Não possui sistema de comunicação direta
+• Agendamento Online: Não permite marcação de horários pela plataforma
+• Sistema de Avaliação: Não possui sistema de feedback das monitorias
 
 <h2>👥 Público-Alvo</h2>
 
-Estudantes e monitores da instituição que buscam um meio eficiente de gerenciar e participar de monitorias acadêmicas.
+• Estudantes do IFSP-Jacareí que buscam monitoria, organizando de maneira simples, acessível e organizada para os alunos interessados.
+• Monitores que oferecem suporte nas disciplinas, divulgando suas monitorias de forma clara e objetiva para os alunos interessados.
+• Professores e coordenadores que acompanham as monitorias, para que o aluno possa saber o professor responsável a recorrer em casos de problemas.
 
 <h2>☑️ Requisitos do Sistema</h2>
 
 <h3>Requisitos Funcionais</h3>
 
-	•	Cadastro de Usuários: O sistema deve permitir o cadastro de monitores e alunos.
-	•	Agendamento de Sessões: Deve ser possível agendar e gerenciar sessões de monitoria.
-	•	Consulta de Horários: Alunos podem visualizar horários disponíveis por disciplina ou monitor.
+• Visualização de Disciplinas: Sistema deve exibir as disciplinas disponíveis para monitoria
+• Gerenciamento de Conteúdo: Interface para adicionar/remover disciplinas
+• Navegação Entre Páginas: Sistema de menu para acesso às diferentes seções
+• Responsividade: Adaptação para diferentes dispositivos
+• Exibição de Informações: Cada monitoria deve mostrar seus detalhes específicos
 
 <h3>Requisitos Não Funcionais</h3>
-  
-	•	Desempenho: O sistema deve responder às ações do usuário em até 2 segundos.
-	•	Segurança: Dados pessoais devem ser protegidos e armazenados de forma segura.
-	•	Usabilidade: A interface deve ser intuitiva e fácil de usar.
+
+• Performance: Carregamento rápido das páginas e transições suaves
+• Usabilidade: Interface intuitiva e fácil de usar
+• Responsividade: Adaptação para diferentes tamanhos de tela
+• Design: Interface moderna e agradável com tema dark, favorecendo usuários que preferem este estilo e aqueles com sensibilidade à luz forte
+• Manutenibilidade: Código organizado e bem estruturado
 
 <h2>📊 Modelagem do Banco de Dados</h2>
 
@@ -64,23 +71,43 @@ Imagem do diagrama de arquitetura da aplicação.
 
 <h2>⚛Tecnologias Utilizadas</h2>
 
-	•	Frontend: React
-	•	Backend: Node.js, Express
-	•	Banco de Dados: MySQL Workbanch
-	•	Outras: Bibliotecas e frameworks adicionais - serão adicionados na medida que forem usados.
-
+• HTML5: Estruturação das páginas
+• CSS3: Estilização e responsividade
+• JavaScript: Interatividade e funcionalidades dinâmicas
+• Git: Controle de versão
+• GitHub: Hospedagem do repositório
 
 <h2>🎨 Design da Interface do Usuário</h2>
 
 <h3>Wireframes ou Mockups</h3>
 
-Imagens dos wireframes ou mockups das principais telas da aplicação.
+Link para o Canva com apresentação do projeto **contendo o mockup** das principais telas.
 
 <h3>Descrição das Funcionalidades</h3>
 
-	•	Tela de Login/Cadastro: Descrição de como funciona.
-	•	Dashboard do Aluno: O que o aluno pode fazer nessa tela.
-	•	Dashboard do Monitor: Funcionalidades disponíveis para o monitor.
+• **Página Inicial (Home)**: Apresenta um slider interativo com todas as disciplinas disponíveis para monitoria, permitindo navegação intuitiva entre elas, como:
+  - Nome da disciplina
+  - Cursos sugeridos
+  - Links para informações adicionais
+  - Detalhes sobre a monitoria
+
+• **Páginas de Disciplinas**: Cada disciplina possui sua própria página com informações específicas sobre:
+  - Professor responsável
+  - Monitor responsável
+  - Dias e horários de monitoria
+  - Sala/Link de acesso
+
+• **Página About**: Apresenta informações sobre os desenvolvedores e apoiadores do projeto, incluindo:
+  - Perfil dos desenvolvedores
+  - Informações sobre a direção e coordenação
+  - Histórico e objetivos do projeto
+
+• **Página de Gerenciamento (Manage)**: Interface administrativa que permite:
+  - Adicionar novas disciplinas
+  - Remover disciplinas existentes
+  - Editar informações das disciplinas
+  - Upload de imagens para as disciplinas
+  - Gerenciamento dos cursos sugeridos
 
 <h2>👨‍💻 Desenvolvedores</h2>
 

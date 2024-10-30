@@ -409,3 +409,48 @@ a {
     background-color: #483d8b;
     transform: scale(1.05);
 }
+
+/* Media queries for responsiveness on different devices */
+@media (max-width: 600px) {
+    .slider .list .item .content h2 {
+        font-size: 40px;
+    }
+
+    .slider .list .item .content p:nth-child(1),
+    .slider .list .item .content p:nth-child(3) {
+        font-size: 14px;
+    }
+
+    .arrows button {
+        width: 30px;
+        height: 30px;
+        font-size: large;
+    }
+
+    .thumbnail .item {
+        width: 100px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 400px) {
+    .slider .list .item .content h2 {
+        font-size: 30px;
+    }
+
+    .slider .list .item .content p:nth-child(1),
+    .slider .list .item .content p:nth-child(3) {
+        font-size: 12px;
+    }
+
+    .arrows button {
+        width: 25px;
+        height: 25px;
+        font-size: medium;
+    }
+
+    .thumbnail .item {
+        width: 80px;
+        height: 120px;
+    }
+}

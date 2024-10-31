@@ -77,6 +77,7 @@ Imagem do diagrama de arquitetura da aplicação.
 • Git: Controle de versão
 • GitHub: Hospedagem do repositório
 
+
 <h2>🎨 Design da Interface do Usuário</h2>
 
 <h3>Wireframes ou Mockups</h3>

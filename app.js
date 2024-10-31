@@ -22,7 +22,7 @@ const Monitorias = require('./models/monitorias')
 //Rotas
     //          HOME
         app.get("/home",function(req,res){
-            Monitorias.findAll().then(function(monitorias){
+            Monitorias.findAll().then(function(Monitorias){
                 res.render('src/home/index',{Monitorias:Monitorias})
             })
         })

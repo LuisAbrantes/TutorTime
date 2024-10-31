@@ -1,6 +1,6 @@
 const db = require('./db');
 
-const Monitorias = db.sequelize.define('monitorias', {
+const Monitorias =db.sequelize.define('monitorias', {
     id_monitoria: {
         type: db.Sequelize.INTEGER,
         primaryKey: true,
@@ -40,7 +40,6 @@ const Monitorias = db.sequelize.define('monitorias', {
 })
 
 module.exports = Monitorias
-
 
 /*
                     TABLES

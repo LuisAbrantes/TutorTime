@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Disciplinas - TutorTime</title>
     <link rel="stylesheet" href="/style.css">
+    <style>
+        .bloco{
+            width: 400px;
+            height: 800px;
+            background-color: gray;
+            border-radius: 5%;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -23,147 +31,27 @@
 
     <main>
         <h1 style="text-align: center;">Gerenciar Disciplinas</h1>
-        <button id="toggleFormButton">Adicionar Nova Disciplina</button>
-      
-            <form  id="newSubjectForm" action="/add" method="POST" style="display: none;">
-
-                <button type="button" id="closeFormButton" class="close-button">&times;</button>
-                <h2>Adicionar Nova Disciplina</h2>
-                <div class="form-group">
-                    <label for="subjectName">Nome da Disciplina</label>
-                    <input type="text" id="subjectName" required name="nome">
-                </div>
-                <div class="form-group">
-                    <label for="subjectImageFile">Imagem da Disciplina (Arquivo)</label>
-                    <input type="file" id="subjectImageFile" accept="image/*" name="arqimg">
-                </div>
-                <div class="form-group">
-                    <label for="subjectImageUrl">URL da Imagem</label>
-                    <input type="text" id="subjectImageUrl" name="urlimg">
-                </div>
-                <div class="form-group">
-                    <label for="subjectCourses">Cursos Sugeridos</label>
-                    <input type="text" id="subjectCourses" required name="cursossug">
-                </div>
-                <div class="form-group">
-                    <label for="responsibleTeacher">Professor Responsável</label>
-                    <input type="text" id="responsibleTeacher" required name="profresp">
-                </div>
-                <div class="form-group">
-                    <label for="responsibleMonitor">Monitor Responsável</label>
-                    <input type="text" id="responsibleMonitor" required name="monitoresp">
-                </div>
-                <div class="form-group">
-                    <label for="monitoringDaysTimes">Dias e Horários da Monitoria</label>
-                    <input type="text" id="monitoringDaysTimes" required name="diahr">
-                </div>
-                <div class="form-group">
-                    <label for="roomAccessLink">Sala/Link de Acesso</label>
-                    <input type="text" id="roomAccessLink" required name="salink">
-                </div>
-                <button type="submit">Cadastrar</button>
+        
+        <div class="bloco">
+            <form action="/add" method="POST">
+            Adicionar Monitoria<br>
+            <input type="text" name="nome"><br>
+            <input type="text" name="urlimg"><br>
+            <input type="text" name="cursossug"><br>
+            <input type="text" name="profresp"><br>
+            <input type="text" name="monitoresp"><br>
+            <input type="text" name="diahr"><br>
+            <input type="text" name="salink"><br>
+            <button type="submit">Adicionar</button>
             </form>
-
+        </div>
         <div id="subjectList">
             <!-- Lista de disciplinas será gerada aqui -->
         </div>
     </main>
 
     <script>
-        document.getElementById('toggleFormButton').addEventListener('click', function() {
-        let form = document.getElementById('newSubjectForm');
-        form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
-    });
-
-    document.getElementById('newSubjectForm').addEventListener('submit', function(event) {
-        event.preventDefault();
         
-        let subjectName = document.getElementById('subjectName').value;
-        let subjectImageFile = document.getElementById('subjectImageFile').files[0];
-        let subjectImageUrl = document.getElementById('subjectImageUrl').value;
-        let subjectCourses = document.getElementById('subjectCourses').value;
-        let responsibleTeacher = document.getElementById('responsibleTeacher').value;
-        let responsibleMonitor = document.getElementById('responsibleMonitor').value;
-        let monitoringDaysTimes = document.getElementById('monitoringDaysTimes').value;
-        let roomAccessLink = document.getElementById('roomAccessLink').value;
-
-        if (subjectImageFile) {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                let subjectImage = e.target.result;
-                addSubject(subjectName, subjectImage, subjectCourses, responsibleTeacher, responsibleMonitor, monitoringDaysTimes, roomAccessLink);
-            };
-            reader.readAsDataURL(subjectImageFile);
-        } else if (subjectImageUrl) {
-            addSubject(subjectName, subjectImageUrl, subjectCourses, responsibleTeacher, responsibleMonitor, monitoringDaysTimes, roomAccessLink);
-        } else {
-            alert("Por favor, forneça uma imagem ou um link para a imagem.");
-        }
-    });
-
-    function addSubject(name, image, courses, teacher, monitor, daysTimes, roomLink) {
-        let subjectList = document.getElementById('subjectList');
-        let subjectItem = document.createElement('div');
-        subjectItem.classList.add('subject-item');
-        subjectItem.innerHTML = `
-            <img src="${image}" alt="${name}">
-            <h2>${name}</h2>
-            <p>Cursos sugeridos: ${courses}</p>
-            <p>Professor Responsável: ${teacher}</p>
-            <p>Monitor Responsável: ${monitor}</p>
-            <p>Dias e Horários da Monitoria: ${daysTimes}</p>
-            <p>Sala/Link de Acesso: ${roomLink}</p>
-            <button class="edit">Editar</button>
-            <button class="delete">Remover</button>
-        `;
-        subjectList.appendChild(subjectItem);
-
-        // Hide the form after adding the subject
-        document.getElementById('newSubjectForm').style.display = 'none';
-
-        // Adiciona eventos de edição e remoção
-        subjectItem.querySelector('.edit').addEventListener('click', () => editSubject(subjectItem));
-        subjectItem.querySelector('.delete').addEventListener('click', () => removeSubject(subjectItem));
-        
-        document.getElementById('subjectName').value=''
-        document.getElementById('subjectImageFile').files[0]=''
-        document.getElementById('subjectImageUrl').value=''
-        document.getElementById('subjectCourses').value=''
-        document.getElementById('responsibleTeacher').value=''
-        document.getElementById('responsibleMonitor').value=''
-        document.getElementById('monitoringDaysTimes').value=''
-        document.getElementById('roomAccessLink').value=''
-    }
-
-    // Add event listener to the close button to hide the form
-    document.getElementById('closeFormButton').addEventListener('click', function() {
-        document.getElementById('newSubjectForm').style.display = 'none';
-    });
-
-    function editSubject(subjectItem) {
-        let name = subjectItem.querySelector('h2').innerText;
-        let courses = subjectItem.querySelector('p:nth-child(3)').innerText.replace('Cursos sugeridos: ', '');
-        let teacher = subjectItem.querySelector('p:nth-child(4)').innerText.replace('Professor Responsável: ', '');
-        let monitor = subjectItem.querySelector('p:nth-child(5)').innerText.replace('Monitor Responsável: ', '');
-        let daysTimes = subjectItem.querySelector('p:nth-child(6)').innerText.replace('Dias e Horários da Monitoria: ', '');
-        let roomLink = subjectItem.querySelector('p:nth-child(7)').innerText.replace('Sala/Link de Acesso: ', '');
-
-        document.getElementById('subjectName').value = name;
-        document.getElementById('subjectCourses').value = courses;
-        document.getElementById('responsibleTeacher').value = teacher;
-        document.getElementById('responsibleMonitor').value = monitor;
-        document.getElementById('monitoringDaysTimes').value = daysTimes;
-        document.getElementById('roomAccessLink').value = roomLink;
-
-        let form = document.getElementById('newSubjectForm');
-        form.style.display = 'block';
-
-        subjectItem.remove();
-    }
-
-    function removeSubject(subjectItem) {
-        subjectItem.remove();
-    }
 </script>
 </body>
 </html>

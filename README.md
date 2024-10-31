@@ -1,4 +1,4 @@
-<h1 align="center">TutorTime 🎓</h1>
+![WorkBench](https://github.com/user-attachments/assets/5f64e496-ce97-4cc4-9054-c7aebac724e9)<h1 align="center">TutorTime 🎓</h1>
 
 <p align="center">Um trabalho para a disciplina de Desenvolvimento de Aplicações com Banco de Dados - 3º Informática do IFSP-Jacareí.</p>
 
@@ -57,7 +57,8 @@ O TutorTime é uma plataforma web desenvolvida para facilitar o gerenciamento de
 
 <h3>Diagrama ER</h3>
 
-Imagem do diagrama ER.
+![WorkBench](https://github.com/user-attachments/assets/5fa47b3c-2d48-402a-8736-9bf0ddc0c3d4)
+
 
 <h3>Definição das Tabelas</h3>
 

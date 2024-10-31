@@ -67,6 +67,9 @@ Liste das tabelas, campos, tipos de dados e restrições.
 <h2>🛠️ Arquitetura da Aplicação</h2>
 
 ![Captura de tela 2024-10-31 150432](https://github.com/user-attachments/assets/5f1e6161-e98d-449a-9bd5-f99f8e264ca1)
+<h3>Arquitetura de Software</h3>
+![image](https://github.com/user-attachments/assets/94002770-c1e8-4a04-91f0-2c99d46d1c8e)
+
 
 <h2>⚛Tecnologias Utilizadas</h2>
 

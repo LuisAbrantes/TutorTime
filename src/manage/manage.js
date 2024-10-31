@@ -46,10 +46,18 @@ function addSubject(name, image, courses, teacher, monitor, daysTimes, roomLink)
     `;
     subjectList.appendChild(subjectItem);
 
+    // Hide the form after adding the subject
+    document.getElementById('newSubjectForm').style.display = 'none';
+
     // Adiciona eventos de edição e remoção
     subjectItem.querySelector('.edit').addEventListener('click', () => editSubject(subjectItem));
     subjectItem.querySelector('.delete').addEventListener('click', () => removeSubject(subjectItem));
 }
+
+// Add event listener to the close button to hide the form
+document.getElementById('closeFormButton').addEventListener('click', function() {
+    document.getElementById('newSubjectForm').style.display = 'none';
+});
 
 function editSubject(subjectItem) {
     let name = subjectItem.querySelector('h2').innerText;

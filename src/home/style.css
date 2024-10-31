@@ -295,45 +295,143 @@ p {
     #toggleFormButton {
         width: 90%; /* Ajusta a largura do botão para caber melhor em telas menores */
     }
+
+    /* Ensure new content sections are responsive */
+    .new-content-class {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        /* Adjust other properties as needed */
+    }
+}
+
+@media (max-width: 600px) {
+    #newSubjectForm {
+        width: 95%;
+        padding: 20px;
+    }
+
+    #newSubjectForm .close-button {
+        font-size: 25px;
+    }
+
+    .slider .list .item .content h2 {
+        font-size: 40px;
+    }
+
+    .slider .list .item .content p:nth-child(1),
+    .slider .list .item .content p:nth-child(3) {
+        font-size: 14px;
+    }
+
+    .arrows button {
+        width: 30px;
+        height: 30px;
+        font-size: large;
+    }
+
+    .thumbnail .item {
+        width: 100px;
+        height: 150px;
+    }
+
+    /* Further adjustments for smaller screens */
+    .new-content-class {
+        font-size: 14px;
+        /* Modify margins, padding, or hide certain elements if necessary */
+    }
+}
+
+@media (max-width: 400px) {
+    .slider .list .item .content h2 {
+        font-size: 30px;
+    }
+
+    .slider .list .item .content p:nth-child(1),
+    .slider .list .item .content p:nth-child(3) {
+        font-size: 12px;
+    }
+
+    .arrows button {
+        width: 25px;
+        height: 25px;
+        font-size: medium;
+    }
+
+    .thumbnail .item {
+        width: 80px;
+        height: 120px;
+    }
+
+    /* Fine-tune styles for very small screens */
+    .new-content-class {
+        font-size: 12px;
+        /* Additional adjustments */
+    }
 }
 
 a {
     color: #eee;
 }
 
+/* Center the form on the screen */
 #newSubjectForm {
     position: fixed;
-    top: 50px;
-    right: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
     background-color: #222;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 10px;
     z-index: 1000;
+    overflow-y: auto;
+    max-height: 90%;
 }
 
-#newSubjectForm input {
-    margin-bottom: 5px;
-    padding: 5px;
-    border: none;
-    border-radius: 3px;
-    width: 100%;
-    box-sizing: border-box;
+/* Style the form heading */
+#newSubjectForm h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
 }
 
-#newSubjectForm button {
-    background-color: #4CAF50;
-    color: white;
+/* Style the close button */
+#newSubjectForm .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
     border: none;
-    padding: 10px;
-    border-radius: 5px;
+    font-size: 30px;
+    color: #fff;
     cursor: pointer;
+}
+
+#newSubjectForm .close-button:hover {
+    color: #ddd;
+}
+
+/* Style form groups */
+#newSubjectForm .form-group {
+    margin-bottom: 15px;
     width: 100%;
     transition: background-color 0.3s;
 }
 
 #newSubjectForm button:hover {
     background-color: #45a049;
+}
+
+#newSubjectForm #closeFormButton {
+    background-color: #f44336;
+    /* ...additional styling as needed... */
+}
+
+#newSubjectForm #closeFormButton:hover {
+    background-color: #d32f2f;
 }
 
 #toggleFormButton {

@@ -68,7 +68,8 @@ Liste das tabelas, campos, tipos de dados e restrições.
 
 ![Captura de tela 2024-10-31 150432](https://github.com/user-attachments/assets/5f1e6161-e98d-449a-9bd5-f99f8e264ca1)
 <h3>Arquitetura de Software</h3>
-![image](https://github.com/user-attachments/assets/94002770-c1e8-4a04-91f0-2c99d46d1c8e)
+![excalidraw](https://github.com/user-attachments/assets/051eeb80-5ff9-40ac-bd4b-5eed829b74e4)
+
 
 
 <h2>⚛Tecnologias Utilizadas</h2>

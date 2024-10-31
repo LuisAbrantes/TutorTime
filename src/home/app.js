@@ -67,22 +67,26 @@ document.getElementById('newSubjectForm').addEventListener('submit', function(ev
     let subjectImageFile = document.getElementById('subjectImageFile').files[0];
     let subjectImageUrl = document.getElementById('subjectImageUrl').value;
     let subjectCourses = document.getElementById('subjectCourses').value;
+    let responsibleTeacher = document.getElementById('responsibleTeacher').value;
+    let responsibleMonitor = document.getElementById('responsibleMonitor').value;
+    let monitoringDaysTimes = document.getElementById('monitoringDaysTimes').value;
+    let roomAccessLink = document.getElementById('roomAccessLink').value;
 
     if (subjectImageFile) {
         let reader = new FileReader();
         reader.onload = function(e) {
             let subjectImage = e.target.result;
-            addNewSubject(subjectName, subjectImage, subjectCourses);
+            addNewSubject(subjectName, subjectImage, subjectCourses, responsibleTeacher, responsibleMonitor, monitoringDaysTimes, roomAccessLink);
         };
         reader.readAsDataURL(subjectImageFile);
     } else if (subjectImageUrl) {
-        addNewSubject(subjectName, subjectImageUrl, subjectCourses);
+        addNewSubject(subjectName, subjectImageUrl, subjectCourses, responsibleTeacher, responsibleMonitor, monitoringDaysTimes, roomAccessLink);
     } else {
         alert("Por favor, forneça uma imagem ou um link para a imagem.");
     }
 });
 
-function addNewSubject(name, image, courses) {
+function addNewSubject(name, image, courses, teacher, monitor, daysTimes, roomLink) {
     // Adiciona novo item ao slider
     let newItem = document.createElement('div');
     newItem.classList.add('item');
@@ -96,6 +100,10 @@ function addNewSubject(name, image, courses) {
             <p>
                 Cursos sugeridos: ${courses}.
             </p>
+            <p>Professor Responsável: ${teacher}</p>
+            <p>Monitor Responsável: ${monitor}</p>
+            <p>Dias e Horários da Monitoria: ${daysTimes}</p>
+            <p>Sala/Link de Acesso: ${roomLink}</p>
         </div>
     `;
     document.querySelector('.slider .list').appendChild(newItem);
@@ -112,7 +120,7 @@ function addNewSubject(name, image, courses) {
     document.querySelector('.thumbnail').appendChild(newThumbnail);
 
     // Cria nova página HTML
-    createNewSubjectPage(name, image, courses);
+    createNewSubjectPage(name, image, courses, teacher, monitor, daysTimes, roomLink);
 
     // Atualiza contagem de itens
     items = document.querySelectorAll('.slider .list .item');
@@ -120,7 +128,7 @@ function addNewSubject(name, image, courses) {
     countItem = items.length;
 }
 
-function createNewSubjectPage(name, image, courses) {
+function createNewSubjectPage(name, image, courses, teacher, monitor, daysTimes, roomLink) {
     let newPageContent = `
 <!DOCTYPE html>
 <html lang="en">
@@ -146,6 +154,10 @@ function createNewSubjectPage(name, image, courses) {
         <h1>${name}</h1>
         <img src="${image}" alt="${name}">
         <p>Cursos sugeridos: ${courses}</p>
+        <p>Professor Responsável: ${teacher}</p>
+        <p>Monitor Responsável: ${monitor}</p>
+        <p>Dias e Horários da Monitoria: ${daysTimes}</p>
+        <p>Sala/Link de Acesso: ${roomLink}</p>
     </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-![WorkBench](https://github.com/user-attachments/assets/5f64e496-ce97-4cc4-9054-c7aebac724e9)<h1 align="center">TutorTime 🎓</h1>
+<h1 align="center">TutorTime 🎓</h1>
 
 <p align="center">Um trabalho para a disciplina de Desenvolvimento de Aplicações com Banco de Dados - 3º Informática do IFSP-Jacareí.</p>
 
@@ -66,9 +66,7 @@ Liste das tabelas, campos, tipos de dados e restrições.
 
 <h2>🛠️ Arquitetura da Aplicação</h2>
 
-Diagrama de Arquitetura
-
-Imagem do diagrama de arquitetura da aplicação.
+![Captura de tela 2024-10-31 150432](https://github.com/user-attachments/assets/5f1e6161-e98d-449a-9bd5-f99f8e264ca1)
 
 <h2>⚛Tecnologias Utilizadas</h2>
 

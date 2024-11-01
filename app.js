@@ -3,6 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const handlebars = require('express-handlebars')
 const Monitorias = require('./models/monitorias')
+let c =1
 
 //-Config⚙️
     //Template Engine
@@ -34,13 +35,18 @@ const Monitorias = require('./models/monitorias')
         
     //          MANAGE
         app.get("/manage",function(req,res){
-            res.render('src/manage/manage')
+            Monitorias.findAll().then(function(Monitorias){
+                res.render('src/manage/manage',{Monitorias:Monitorias})
+            })
         })
+    
+            app.get("/home/:materia",function(req,res){
+                res.send(`Materia Selecionada >>> ${req.params.materia}`)
+            })
 
 //Registrando em Databases
     //Monitorias
         app.post("/add",function(req,res){
-            console.log("OI")
             
             Monitorias.create({
                 nome :req.body.nome,
@@ -51,13 +57,16 @@ const Monitorias = require('./models/monitorias')
                 diahrs:req.body.diahr,
                 sala_link:req.body.salink
             }).then(function(){
-                res.redirect('/home')
+                res.redirect('/manage')
             }).catch(function(erro){
                 res.send("Deu Erro Boy >>>>> "+erro)
             })
         })
-
-
+//Deletando Dados!
+    app.get('/deletar/:id',function(req,res){
+        Monitorias.destroy({where:{'id_monitoria':req.params.id}})
+        res.redirect('/manage')
+    })
 //Inicializando Servidor!
     app.listen(3000)
     console.log("Server Rodando na porta 3000!")

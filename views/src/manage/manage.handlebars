@@ -6,11 +6,11 @@
     <title>Gerenciar Disciplinas - TutorTime</title>
     <link rel="stylesheet" href="/style.css">
     <style>
-        .bloco{
-            width: 400px;
-            height: 800px;
-            background-color: gray;
-            border-radius: 5%;
+        .monitoria{
+            font-size: 20px;
+            display: inline-block;
+            position: flex;
+            background-color: red;
         }
     </style>
 </head>
@@ -23,35 +23,76 @@
             TutorTime - IFSP
         </div>
         <ul class="menu">
-            <li><a href="../home/index.html">Home</a></li>
-            <li><a href="../about/about.html">About</a></li>
+            <li><a href="/home">Home</a></li>
+            <li><a href="about">About</a></li>
             <li><a href="#">Manage</a></li>
         </ul>
     </header>
 
     <main>
-        <h1 style="text-align: center;">Gerenciar Disciplinas</h1>
-        
+        <h1 style="text-align: center;">Gerenciar Monitorias</h1>
         <div class="bloco">
-            <form action="/add" method="POST">
-            Adicionar Monitoria<br>
-            <input type="text" name="nome"><br>
-            <input type="text" name="urlimg"><br>
-            <input type="text" name="cursossug"><br>
-            <input type="text" name="profresp"><br>
-            <input type="text" name="monitoresp"><br>
-            <input type="text" name="diahr"><br>
-            <input type="text" name="salink"><br>
-            <button type="submit">Adicionar</button>
-            </form>
+            <div class="meio">
+                <h1>Adicionar Monitoria</h1>
+            </div>
+            
+            
+            <div class="inputs">
+                <form id="meuFormulario" action="/add" method="POST">
+                    <input type="text" class="input" name="nome" id="nome" required placeholder="Nome da Disciplina"><br>
+                    <input type="text" class="input" name="urlimg" id="url" required placeholder="URL da Imagem"><br>
+                    <input type="text" class="input" name="cursossug" id="curso" required placeholder="Cursos Sugeridos"><br>
+                    <input type="text" class="input" name="profresp" id="prof" required placeholder="Professor Responsável"><br>
+                    <input type="text" class="input" name="monitoresp" id="monitor" required placeholder="Monitor Responsável"><br>
+                    <input type="text" class="input" name="diahr" id="dia" required placeholder="Dias e Horários"><br>
+                    <input type="text" class="input" name="salink" id="sala" required placeholder="Sala/Link de Acesso"><br>
+                    <button type="submit" class="adicionar">Adicionar</button>
+                </form>
+            </div>
         </div>
-        <div id="subjectList">
+        <div id="ListaDeMonitorias" class="listadisciplinas">
             <!-- Lista de disciplinas será gerada aqui -->
+            <h1 style=" padding-left: 20px;">
+                Monitorias
+            </h1>
+            {{#each Monitorias}}
+            <div id="monitoria_mae" class="monitoria_mae">
+                <div class="monitoria"> <!--Foto-->
+                    <img src={{urlimg}}>
+                </div>
+
+                <div class="monitoria"> <!--Nome-->
+                    Materia : {{nome}}
+                </div>
+
+                <div class="monitoria"> <!--Prof-->
+                    Professor : {{profresp}}
+                </div>
+
+                <div class="monitoria"> <!--Monitor-->
+                    Monitor : {{monitoresp}}
+                </div>
+
+                <div class="monitoria"> <!--Dia-->
+                    Dia / Hrs : {{diahrs}}
+                </div>
+                
+                <div class="monitoria"> <!--Sala-->
+                    Sala / Link : {{salink}}
+                </div>
+                
+                <div class="monitoria" onclick>
+                    <a href="/deletar/{{id_monitoria}}"><button>Apagar</button></a>
+                </div>
+
+                <br>
+                <hr>
+            </div>
+            {{/each}}
         </div>
+        
     </main>
 
-    <script>
-        
-</script>
+
 </body>
 </html>

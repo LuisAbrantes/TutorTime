@@ -44,13 +44,56 @@
             
             <div class="inputs">
                 <form id="meuFormulario" action="/add" method="POST">
-                    <input type="text" class="input" name="nome" id="nome" required placeholder="Nome da Disciplina"><br>
-                    <input type="text" class="input" name="urlimg" id="url" required placeholder="URL da Imagem" title="PROMPT DO GPT PARA USAR"><br>
-                    <input type="text" class="input" name="cursossug" id="curso" required placeholder="Cursos Sugeridos"><br>
-                    <input type="text" class="input" name="profresp" id="prof" required placeholder="Professor Responsável"><br>
-                    <input type="text" class="input" name="monitoresp" id="monitor" required placeholder="Monitor Responsável"><br>
-                    <input type="text" class="input" name="diahr" id="dia" required placeholder="Dias e Horários"><br>
-                    <input type="text" class="input" name="salink" id="sala" required placeholder="Sala/Link de Acesso"><br>
+                    <div><!--Materia-->
+                        Materia <br>
+                        <select name="materiaREQ" class="input">
+                        {{#each Materia}}
+                            <option value="{{name}}" name="materiaREQ">{{nome}}</option>
+                        {{/each}}
+                        </select>
+                    </div>
+                    
+                    <div><!--Monitor-->
+                        Monitor <br>
+                        <input type="text" name="monitorREQ" class="input">
+                    </div>
+
+                    <div><!--Professor-->
+                        Professor <br>
+                        <input type="text" name="professorREQ" class="input" >
+                    </div>
+
+                    <div><!--Local-->
+                        Local
+                        <select name="localREQ" class="input">
+                            <option value="Sala1"> Sala 1 </option>
+                            <option value="Sala2"> Sala 2 </option>
+                            <option value="Sala3"> Sala 3 </option>
+                            <!--Salas...-->
+                        </select>
+                    </div>
+
+                    <div><!--Dia-->
+                        Dia <br>
+                        <select name="diaREQ" class="input">
+                            <option value="Segunda">Segunda-Feira</option>
+                            <option value="Terça-Feira">Terça-Feira</option>
+                            <option value="Quarta-Feira">Quarta-Feira</option>
+                            <option value="Quinta-Feira">Quinta-Feira</option>
+                            <option value="Sexta-Feira">Sexta-Feira</option>
+                        </select>
+                    </div>
+
+                    <div><!--Horario-->
+                        Horario <br>
+                        <input type="time" class="input" name="horarioREQ">
+                    </div> 
+                    
+                    <div><!--Descricao-->
+                        Descricao <br>
+                        <input type="text" class="desc" name="descricaoREQ">
+                    </div> <br>
+
                     <button type="submit" class="adicionar">Adicionar</button>
                 </form>
             </div>

@@ -161,9 +161,9 @@
         
     //          MANAGE
         app.get("/manage",function(req,res){
-            Materia.findAll().then(function(Materia){
+            Professor.findAll().then(function(Professor){
                     Monitorias.findAll().then(function(Monitorias){
-                        res.render('src/manage/manage',{Monitorias:Monitorias,Materia:Materia})
+                        res.render('src/manage/manage',{Monitorias:Monitorias,Materia:Professor})
                     })})})
 
     //          HOME >>> MATERIA
@@ -188,28 +188,45 @@
 
             }
 //Database
-    //Monitorias
-        app.post("/add",function(req,res){
-                Monitor.create({
-                    nome:req.body.monitorREQ,
-                    email:"TESTE"
-                })
-                const id_monitor_reg = Monitor.findAll({where{req.body.monitorREQ}})
-                Monitorias.create({
-                    horario : req.body.horarioREQ,
-                    dia : req.body.diaREQ,
-                    local : req.body.localREQ,
-                    imagemUrl : Imagem(req.body.materiaREQ),
-                    descricao : req.body.descricaoREQ,
-                    professorId : req.body.professor,
-                    monitorId : req.body.monitorREQ,
-                    materiaId :req.body.materiaREQ
-                }).then(function(){
-                    res.redirect('/manage')
-                }).catch(function(erro){
-                    res.send("Deu Erro Boy >>>>> "+erro)
-                })
-        })
+    //Criando monitorias
+        app.post("/add", async function(req, res) {
+            try {
+                // Criação dos registros de Monitor e Professor
+                const monitor = await Monitor.create({
+                    nome: req.body.monitorREQ,
+                    email: "TESTE"
+                });
+                
+                const professor = await Professor.create({
+                    nome: req.body.professorREQ,
+                    email: "TESTE"
+                });
+                
+                // Aqui você pode acessar os IDs diretamente
+                const id_moni = monitor.id;  // ID do monitor criado
+                const id_prof = professor.id; // ID do professor criado
+        
+                console.log(`ID MONITOR >>> ${id_moni}`);
+                console.log(`ID PROFESSOR >>> ${id_prof}`);
+                
+                // Criação da Monitoria com os IDs obtidos
+                await Monitorias.create({
+                    horario: req.body.horarioREQ,
+                    dia: req.body.diaREQ,
+                    local: req.body.localREQ,
+                    imagemUrl: Imagem(req.body.materiaREQ),
+                    descricao: req.body.descricaoREQ,
+                    professorId: id_prof,
+                    monitorId: id_moni,
+                    materiaId: 1
+                });
+                
+                res.redirect('/manage');
+            } catch (erro) {
+                res.send("Deu Erro Boy >>>>> " + erro);
+            }
+            });
+    
         /*
         +-------------+--------------+------+-----+---------+----------------+
         | Field       | Type         | Null | Key | Default | Extra          |

@@ -11,6 +11,8 @@
         const Monitor= tutortime.Monitor
         const Inscricao= tutortime.Inscricao
         const Materia = tutortime.Materia
+        const Existente = tutortime.Existente
+        let c = 1
 
 //TESTE
     /*const todasDisciplinas = [
@@ -161,17 +163,9 @@
 //Rotas
     //          HOME
         app.get("/home",function(req,res){
-            Materia.findAll().then(function(materias) {
-                Monitorias.findAll({
-                include: [
-                    {
-                        model: Materia,
-                        as: 'Materia' // Certifique-se de usar o alias correto
-                    }],
-                    raw: false
-            }).then(function(Monitorias){
-                res.render('src/home/index',{Monitorias:Monitorias})
-            })})
+            Existente.findAll().then(function(existente){
+                res.render('src/home/index',{Existente:existente})
+            })
         })
     
     //          ABOUT
@@ -207,12 +201,22 @@
     
 
     //          HOME >>> MATERIA
-            app.get("/home/:materia",function(req,res){
-                Materia.findAll().then(function(materia){
-                    Monitorias.findAll({include: [
+        app.get("/home/:materia", function(req, res) {
+            // Primeiro, busque a Materia com o nome que corresponde ao parametro "materia"
+            Materia.findOne({ 
+                where: { nome: req.params.materia } 
+            }).then(function(materia) {
+                if (!materia) {
+                    return res.status(404).send('Matéria não encontrada'); // Se não encontrar a matéria
+                }
+        
+                // Agora, busque as monitorias associadas a esta matéria específica
+                Monitorias.findAll({
+                    where: { materiaId: materia.id },  // Filtra pelas monitorias associadas a esta matéria
+                    include: [
                         {
                             model: Materia,
-                            as: 'Materia' // Certifique-se de usar o alias correto
+                            as: 'Materia' // Alias correto para a associação
                         },
                         {
                             model: Professor,
@@ -220,31 +224,24 @@
                         }
                     ],
                     raw: false
-                }).then(function(monitorias){
-                        res.render('new',{monitorias:monitorias, Materia:materia})
-                    })
-                })
-    
-            })
-
-    //         TESTE 
-            app.get("/TESTE", async function(req, res) {
-                try {
-                    // Buscando todas as monitorias com a associação do professor
-                    const monitorias = await Monitorias.findAll({
-                        include: {
-                            model: Professor,  // Incluir os dados do professor associado
-                            attributes: ['nome']  // Aqui você pode especificar quais atributos do professor deseja
-                        }
+                }).then(function(monitorias) {
+                    // Passa para a view
+                    res.render('new', { 
+                        monitorias: monitorias, 
+                        Materia: materia,
+                        REQ: req.params.materia
                     });
-            
-                    // Enviando os dados para o Handlebars
-                    res.render('oi', { monitorias });
-                } catch (error) {
-                    console.error(error);
-                    res.status(500).send('Erro ao carregar monitorias');
-                }
+                }).catch(function(err) {
+                    console.error('Erro ao buscar monitorias:', err);
+                    res.status(500).send('Erro ao buscar monitorias');
+                });
+            }).catch(function(err) {
+                console.error('Erro ao buscar matéria:', err);
+                res.status(500).send('Erro ao buscar matéria');
             });
+        });
+
+    //         TESTE
 //Database
     //Criando monitorias
         app.post("/add", async function(req, res) {
@@ -259,15 +256,44 @@
                     nome: req.body.professorREQ,
                     email: "TESTE"
                 })
-
                 
-                // Aqui você pode acessar os IDs diretamente
                 const id_moni = monitor.id
                 const id_prof = professor.id 
                 const id_materia = await Materia.findOne({ where: { id: req.body.materiaREQ } })
 
                 console.log(`ID MONITOR >>> ${id_moni}`);
                 console.log(`ID PROFESSOR >>> ${id_prof}`);
+
+                async function verificarEAdicionarMateria(id_materia) {
+                try {
+                    
+                    const verify = await Existente.findAll({
+                    where: {
+                        nome: id_materia.nome
+                    }
+                    });
+
+                    
+                    if (verify.length === 0) {
+                    
+                    console.log("NAO TEM !! " + id_materia.nome);
+                    
+                    // Adicionar a nova matéria
+                    await Existente.create({
+                        nome: id_materia.nome 
+                    });
+                    console.log("Matéria adicionada: " + id_materia.nome);
+                    
+                    } else {
+                    console.log("TEM " + verify[0].nome); 
+                    }
+                } catch (error) {
+                    console.error('Erro ao verificar e adicionar matéria:', error);
+                }
+                }
+                verificarEAdicionarMateria({ nome: id_materia.nome });
+
+
                 await Monitorias.create({
                     horario: req.body.horarioREQ,
                     dia: req.body.diaREQ,
@@ -278,6 +304,7 @@
                     monitorId: id_moni,
                     materiaId: id_materia.id
                 });
+                
                 
                 res.redirect('/manage');
             } catch (erro) {

@@ -203,6 +203,12 @@
         | updatedAt     | datetime     | NO   |     | NULL    |                |
         +---------------+--------------+------+-----+---------+----------------+
         */
+        const Existente = sequelize.define('Existente', {
+            nome: {
+              type: DataTypes.STRING,
+              allowNull: false, // Garante que o campo nome não seja nulo
+            }
+          })
 
 
     //Definindo os relacionamentos
@@ -261,5 +267,6 @@
         Monitor, 
         Materia, 
         Monitoria, 
-        Inscricao 
+        Inscricao ,
+        Existente
     };

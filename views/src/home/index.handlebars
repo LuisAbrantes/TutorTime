@@ -45,11 +45,17 @@
             </div>
             {{#each Monitorias}}
             <div class="item">
-                <img src={{urlimg}}>
+                <img src="{{imagemUrl}}">
                 <div class="content">
                     <p>Encontre a sua monitoria</p>
-                    <a href="home/{{nome}}"> 
-                        <h2>{{nome}}</h2>
+                    {{#if Materia}}
+                    <a href="home/{{Materia.nome}}"> 
+                        <h2>
+                            {{Materia.nome}} <!-- Aqui estamos acessando corretamente o nome da matéria -->
+                            {{else}}
+                                Matéria não encontrada.
+                            {{/if}}
+                        </h2>
                     </a> 
                     <p>
                         Cursos sugeridos:{{cursossug}}
@@ -77,9 +83,13 @@
             </div>
             {{#each Monitorias}}
             <div class="item">
-                <img src={{urlimg}}>
+                <img src={{imagemUrl}}>
                 <div class="content">
-                    {{nome}}
+                    {{#if Materia}}
+                    {{Materia.nome}} <!-- Aqui estamos acessando corretamente o nome da matéria -->
+                    {{else}}
+                    Matéria não encontrada.
+                    {{/if}}
                 </div>
             </div>
             {{/each}}

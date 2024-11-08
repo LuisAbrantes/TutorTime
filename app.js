@@ -133,14 +133,26 @@
 
 //-Config⚙️
     //Template Engine
-        app.engine('handlebars',handlebars.engine({defaultLayout:'main',runtimeOptions:{
-            allowedProtoProperties:true,
-            allowProtoPropertiesByDefault:true
-        }}))
+        app.engine('handlebars', handlebars.engine({
+            defaultLayout: 'main',  // Layout padrão
+            runtimeOptions: {
+                allowedProtoProperties: true,
+                allowProtoPropertiesByDefault: true
+            },
+            helpers: {
+                // Helper ifCond para comparar valores
+                ifCond: function(v1, v2, options) {
+                    if (v1 === v2) {
+                        return options.fn(this);  // Se a comparação for verdadeira, executa o bloco {{#ifCond}}
+                    }
+                    return options.inverse(this);  // Caso contrário, executa o bloco {{else}} (ou retorna vazio)
+                }
+            }
+        }));
 
         app.set('view engine','handlebars')
 
-        app.use(express.static('css'))
+        app.use(express.static('css'))      
 
     //BodyParser
         app.use(bodyParser.urlencoded({extended:false}))
@@ -149,9 +161,17 @@
 //Rotas
     //          HOME
         app.get("/home",function(req,res){
-            Monitorias.findAll().then(function(Monitorias){
+            Materia.findAll().then(function(materias) {
+                Monitorias.findAll({
+                include: [
+                    {
+                        model: Materia,
+                        as: 'Materia' // Certifique-se de usar o alias correto
+                    }],
+                    raw: false
+            }).then(function(Monitorias){
                 res.render('src/home/index',{Monitorias:Monitorias})
-            })
+            })})
         })
     
     //          ABOUT
@@ -160,33 +180,71 @@
         })
         
     //          MANAGE
-        app.get("/manage",function(req,res){
-            Professor.findAll().then(function(Professor){
-                    Monitorias.findAll().then(function(Monitorias){
-                        res.render('src/manage/manage',{Monitorias:Monitorias,Materia:Professor})
-                    })})})
+
+        app.get("/manage", function(req, res) {
+            Materia.findAll().then(function(materias) {
+                Monitorias.findAll({
+                    include: [
+                        {
+                            model: Materia,
+                            as: 'Materia' // Certifique-se de usar o alias correto
+                        },
+                        {
+                            model: Professor,
+                            as: 'Professor'
+                        }
+                    ],
+                    raw: false
+                }).then(function(monitorias) {
+                    res.render('src/manage/manage', { Monitorias: monitorias, Materia: materias });
+                }).catch(function(error) {
+                    console.error('Erro ao buscar monitorias:', error);
+                    res.status(500).send('Erro ao carregar monitorias');
+                });
+            })
+        });
+
+    
 
     //          HOME >>> MATERIA
             app.get("/home/:materia",function(req,res){
-                Monitorias.findAll({where:{'nome':req.params.materia}}).then(function(Monitorias){
-                    res.render('oi',{Monitorias:Monitorias})
+                Materia.findAll().then(function(materia){
+                    Monitorias.findAll({include: [
+                        {
+                            model: Materia,
+                            as: 'Materia' // Certifique-se de usar o alias correto
+                        },
+                        {
+                            model: Professor,
+                            as: 'Professor'
+                        }
+                    ],
+                    raw: false
+                }).then(function(monitorias){
+                        res.render('new',{monitorias:monitorias, Materia:materia})
+                    })
                 })
+    
             })
 
-            app.get("/TESTE",function(req,res){
-                res.render("oi")
-                Materia.create({
-                    nome:"Math"
-                })
-            })
-
-            function Imagem(materia) {
-                const imagens = {
-                   'Math':"tal"
+    //         TESTE 
+            app.get("/TESTE", async function(req, res) {
+                try {
+                    // Buscando todas as monitorias com a associação do professor
+                    const monitorias = await Monitorias.findAll({
+                        include: {
+                            model: Professor,  // Incluir os dados do professor associado
+                            attributes: ['nome']  // Aqui você pode especificar quais atributos do professor deseja
+                        }
+                    });
+            
+                    // Enviando os dados para o Handlebars
+                    res.render('oi', { monitorias });
+                } catch (error) {
+                    console.error(error);
+                    res.status(500).send('Erro ao carregar monitorias');
                 }
-                return imagens.materia
-
-            }
+            });
 //Database
     //Criando monitorias
         app.post("/add", async function(req, res) {
@@ -195,30 +253,30 @@
                 const monitor = await Monitor.create({
                     nome: req.body.monitorREQ,
                     email: "TESTE"
-                });
+                })
                 
                 const professor = await Professor.create({
                     nome: req.body.professorREQ,
                     email: "TESTE"
-                });
+                })
+
                 
                 // Aqui você pode acessar os IDs diretamente
-                const id_moni = monitor.id;  // ID do monitor criado
-                const id_prof = professor.id; // ID do professor criado
-        
+                const id_moni = monitor.id
+                const id_prof = professor.id 
+                const id_materia = await Materia.findOne({ where: { id: req.body.materiaREQ } })
+
                 console.log(`ID MONITOR >>> ${id_moni}`);
                 console.log(`ID PROFESSOR >>> ${id_prof}`);
-                
-                // Criação da Monitoria com os IDs obtidos
                 await Monitorias.create({
                     horario: req.body.horarioREQ,
                     dia: req.body.diaREQ,
                     local: req.body.localREQ,
-                    imagemUrl: Imagem(req.body.materiaREQ),
+                    imagemUrl: 'https://images.pexels.com/photos/28706618/pexels-photo-28706618.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
                     descricao: req.body.descricaoREQ,
                     professorId: id_prof,
                     monitorId: id_moni,
-                    materiaId: 1
+                    materiaId: id_materia.id
                 });
                 
                 res.redirect('/manage');
@@ -248,7 +306,7 @@
 
     //Deletando Monitorias
         app.get('/deletar/:id',function(req,res){
-            Monitorias.destroy({where:{'id_monitoria':req.params.id}})
+            Monitorias.destroy({where:{'id':req.params.id}})
             res.redirect('/manage')
         })
 

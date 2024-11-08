@@ -41,14 +41,13 @@
                 <h1>Adicionar Monitoria</h1>
             </div>
             
-            
             <div class="inputs">
                 <form id="meuFormulario" action="/add" method="POST">
                     <div><!--Materia-->
                         Materia <br>
                         <select name="materiaREQ" class="input">
                         {{#each Materia}}
-                            <option value="{{name}}" name="materiaREQ">{{nome}}</option>
+                            <option value="{{id}}" name="materiaREQ">{{nome}}</option>
                         {{/each}}
                         </select>
                     </div>
@@ -106,31 +105,41 @@
             {{#each Monitorias}}
             <div id="monitoria_mae" class="monitoria_mae">
                 <div class="monitoria"> <!--Foto-->
-                    <img src={{urlimg}} class="imagem">
+                    <img src={{imagemUrl}} class="imagem"> <!-- Substitua por imagemUrl -->
                 </div>
 
-                <div class="monitoria"> <!--Nome-->
-                    Materia : {{nome}}
+                <div class="monitoria">
+                    Materia: 
+                    {{#if Materia}}
+                    {{Materia.nome}} <!-- Aqui estamos acessando corretamente o nome da matéria -->
+                    {{else}}
+                        Matéria não encontrada.
+                    {{/if}}
                 </div>
 
-                <div class="monitoria"> <!--Prof-->
-                    Professor : {{professorId}}
+                <div class="monitoria"> <!--Professor-->
+                    Professor: 
+                    {{#if Professor}}
+                        {{Professor.nome}} <!-- Aqui estamos acessando corretamente o nome da matéria -->
+                    {{else}}
+                       Professor não encontrado.
+                    {{/if}} <!-- Alterado para acessar o nome do professor -->
                 </div>
 
                 <div class="monitoria"> <!--Monitor-->
-                    Monitor : {{monitoresp}}
+                    Monitor : {{monitor.nome}} <!-- Alterado para acessar o nome do monitor -->
                 </div>
 
-                <div class="monitoria"> <!--Dia-->
-                    Dia / Hrs : {{diahrs}}
+                <div class="monitoria"> <!--Dia e horário-->
+                    Dia / Hrs : {{dia}} / {{horario}} <!-- Exibe o dia e horário -->
                 </div>
                 
                 <div class="monitoria"> <!--Sala-->
-                    Sala / Link : {{salink}}
+                    Sala / Link : {{local}} <!-- Exibe o local da sala -->
                 </div>
-                
-                <div class="monitoria" onclick>
-                    <a href="/deletar/{{id_monitoria}}"><button>Apagar</button></a>
+                <br>
+                <div class="monitoria">
+                    <a href="/deletar/{{id}}"><button>Apagar</button></a> <!-- Apagar monitoria -->
                 </div>
 
                 <br>
@@ -140,7 +149,5 @@
         </div>
         
     </main>
-
-
 </body>
 </html>

@@ -206,14 +206,49 @@
 
 
     //Definindo os relacionamentos
-        Professor.hasMany(Monitoria, { foreignKey: 'professorId' });
-        Monitor.hasMany(Monitoria, { foreignKey: 'monitorId' });
-        Materia.hasMany(Monitoria, { foreignKey: 'materiaId' });
-        Monitoria.belongsTo(Professor, { foreignKey: 'professorId' });
-        Monitoria.belongsTo(Monitor, { foreignKey: 'monitorId' });
-        Monitoria.belongsTo(Materia, { foreignKey: 'materiaId' });
-        Monitoria.hasMany(Inscricao, { foreignKey: 'monitoriaId' });
-        Inscricao.belongsTo(Monitoria, { foreignKey: 'monitoriaId' });
+        Monitoria.belongsTo(Professor, {
+            foreignKey: 'professorId',
+            as: 'Professor'
+        });
+
+        Monitoria.belongsTo(Monitor, {
+            foreignKey: 'monitorId',
+            as: 'Monitor'
+        });
+
+        Monitoria.belongsTo(Materia, {
+            foreignKey: 'materiaId',
+            as: 'Materia'
+        });
+
+        Monitoria.hasMany(Inscricao, {
+            foreignKey: 'monitoriaId',
+            as: 'Inscricoes'
+        });
+
+        Professor.hasMany(Monitoria, {
+            foreignKey: 'professorId',
+            as: 'Monitorias'
+        });
+
+        Monitor.hasMany(Monitoria, {
+            foreignKey: 'monitorId',
+            as: 'Monitorias'
+        });
+
+
+        Materia.hasMany(Monitoria, {
+            foreignKey: 'materiaId',
+            as: 'Monitorias'
+        });
+
+        Inscricao.belongsTo(Monitoria, {
+            foreignKey: 'monitoriaId',
+            as: 'Monitoria'
+        });
+
+
+
 
     //Sincronizar todas as tabelas com o banco de dados
         sequelize.sync()

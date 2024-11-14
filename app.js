@@ -334,6 +334,16 @@
     //Deletando Monitorias
         app.get('/deletar/:id',function(req,res){
             Monitorias.destroy({where:{'id':req.params.id}})
+            async function verificar() {
+                const id_monitoria = await Monitorias.findOne({ where: { id: req.params.id } })
+                const tds_as_monitorias = await Monitorias
+                const id_mater = id_monitoria.id_materia
+                const materia =await Materia.findOne({where:{id:id_mater}})
+                
+                console.error("ID_MATERIA>>"+id_materia)
+            }
+            verificar()
+            
             res.redirect('/manage')
         })
 

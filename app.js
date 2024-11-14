@@ -170,7 +170,7 @@ const { Sequelize } = require('sequelize')
                  console.error("NOME>>"+primeiro.nome)
             }
             one()
-            Existente.findAll({where:{id:{[Sequelize.Op.gt]:1}}}).then(function(existente){
+            Existente.findAll({order:[['id','ASC']],offset:1}).then(function(existente){
                 console.error(primeiro)
                 res.render('src/home/index',{Existente:existente,primeiro:primeiro})
             })

@@ -77,6 +77,9 @@
             descricao: {
                 type: DataTypes.TEXT,
                 allowNull: true,
+            },
+            imagemUrl:{
+                type:DataTypes.STRING
             }
         });
         /*
@@ -207,6 +210,9 @@
             nome: {
               type: DataTypes.STRING,
               allowNull: false, // Garante que o campo nome não seja nulo
+            },
+            imagemUrl:{
+                type:DataTypes.STRING
             }
           })
 

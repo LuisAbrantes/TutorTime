@@ -5,6 +5,7 @@
     const handlebars = require('express-handlebars')
 //Banco de dados
     const tutortime = require('./models/dados')
+const { Sequelize } = require('sequelize')
     //Tabelas    
         const Monitorias = tutortime.Monitoria
         const Professor= tutortime.Professor
@@ -163,8 +164,15 @@
 //Rotas
     //          HOME
         app.get("/home",function(req,res){
-            Existente.findAll().then(function(existente){
-                res.render('src/home/index',{Existente:existente})
+            let primeiro =""
+            async function one() {
+                 primeiro = await Existente.findOne({order:[['id','ASC']]})
+                 console.error("NOME>>"+primeiro.nome)
+            }
+            one()
+            Existente.findAll({where:{id:{[Sequelize.Op.gt]:1}}}).then(function(existente){
+                console.error(primeiro)
+                res.render('src/home/index',{Existente:existente,primeiro:primeiro})
             })
         })
     
@@ -280,7 +288,8 @@
                     
                     // Adicionar a nova matéria
                     await Existente.create({
-                        nome: id_materia.nome 
+                        nome: id_materia.nome, 
+                        imagemUrl: 'https://images.pexels.com/photos/28706618/pexels-photo-28706618.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'
                     });
                     console.log("Matéria adicionada: " + id_materia.nome);
                     
@@ -333,17 +342,26 @@
 
     //Deletando Monitorias
         app.get('/deletar/:id',function(req,res){
-            Monitorias.destroy({where:{'id':req.params.id}})
-            async function verificar() {
-                const id_monitoria = await Monitorias.findOne({ where: { id: req.params.id } })
-                const tds_as_monitorias = await Monitorias
-                const id_mater = id_monitoria.id_materia
-                const materia =await Materia.findOne({where:{id:id_mater}})
-                
-                console.error("ID_MATERIA>>"+id_materia)
-            }
-            verificar()
             
+            async function verificar() {
+                const monitoriadele = await Monitorias.findOne({ where: { id: req.params.id } })
+                if(monitoriadele!=null){
+                    const id_mat_monitoria = monitoriadele.materiaId
+                    const materia = await Materia.findOne({where:{id:id_mat_monitoria}})
+                    const id_materia = materia.id
+                    console.error(`${id_mat_monitoria} E ${id_materia}`)
+                    const monitorias = await Monitorias.findAll({where:{materiaId:id_materia}})
+                    if (monitorias.length===1) {
+                        console.error("NAO TEM MAIS")
+                        Existente.destroy({where:{nome:materia.nome}})
+                    }
+                    console.error("TEM ISSO DE MONITORIAS>>> "+monitorias.length)
+                }
+                
+            }
+          
+            Monitorias.destroy({where:{'id':req.params.id}})
+            verificar()
             res.redirect('/manage')
         })
 

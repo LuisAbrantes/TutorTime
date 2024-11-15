@@ -49,6 +49,10 @@
             email: {
                 type: DataTypes.STRING,
                 allowNull: true,
+            },
+            materia:{
+                type:DataTypes.STRING,
+                allowNull:false,
             }
         });
         /*

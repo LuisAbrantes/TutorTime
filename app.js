@@ -166,12 +166,20 @@ const { Sequelize } = require('sequelize')
         app.get("/home",function(req,res){
             let primeiro =""
             async function one() {
+
                  primeiro = await Existente.findOne({order:[['id','ASC']]})
-                 console.error("NOME>>"+primeiro.nome)
             }
             one()
             Existente.findAll({order:[['id','ASC']],offset:1}).then(function(existente){
-                console.error(primeiro)
+                if(primeiro===null){
+                    primeiro = 
+                        {
+                            nome:"Sem Monitorias",
+                            imagemUrl:'https://images.pexels.com/photos/949587/pexels-photo-949587.jpeg?auto=compress&cs=tinysrgb&w=600'
+                        }
+                   
+                }
+                console.error(primeiro.nome)
                 res.render('src/home/index',{Existente:existente,primeiro:primeiro})
             })
         })
@@ -210,54 +218,44 @@ const { Sequelize } = require('sequelize')
 
     //          HOME >>> MATERIA
         app.get("/home/:materia", function(req, res) {
-            // Primeiro, busque a Materia com o nome que corresponde ao parametro "materia"
-            Materia.findOne({ 
-                where: { nome: req.params.materia } 
-            }).then(function(materia) {
-                if (!materia) {
-                    return res.status(404).send('Matéria não encontrada'); // Se não encontrar a matéria
-                }
-        
-                // Agora, busque as monitorias associadas a esta matéria específica
-                Monitorias.findAll({
-                    where: { materiaId: materia.id },  // Filtra pelas monitorias associadas a esta matéria
-                    include: [
-                        {
-                            model: Materia,
-                            as: 'Materia' // Alias correto para a associação
-                        },
-                        {
-                            model: Professor,
-                            as: 'Professor'
-                        }
-                    ],
-                    raw: false
-                }).then(function(monitorias) {
-                    // Passa para a view
-                    res.render('new', { 
-                        monitorias: monitorias, 
-                        Materia: materia,
-                        REQ: req.params.materia
-                    });
-                }).catch(function(err) {
-                    console.error('Erro ao buscar monitorias:', err);
-                    res.status(500).send('Erro ao buscar monitorias');
-                });
-            }).catch(function(err) {
-                console.error('Erro ao buscar matéria:', err);
-                res.status(500).send('Erro ao buscar matéria');
-            });
-        });
+            async function desId() {
+                const id_materia = await Materia.findOne({where:{nome:req.params.materia}})
+                    if(id_materia!=null){
+                        Monitorias.findAll({
+                            where:{materiaId:id_materia.id},
+                            include: [{
+                                model: Monitor,
+                                as:'Monitor'
+                            },
+                            {
+                                model:Professor,
+                                as:'Professor'
+                            }
+                        ],
+                            raw:false
+                            }).then(function (monitorias) {
+                            res.render('src/new/new',{  
+                                monitorias:monitorias,
+                                REQ:req.params.materia,
+                            })
+                        })
+                    }
+            }
+            desId()
+        })
 
     //         TESTE
 //Database
     //Criando monitorias
         app.post("/add", async function(req, res) {
             try {
+                const id_materia = await Materia.findOne({ where: { id: req.body.materiaREQ },
+                    attributes: ['id', 'nome', 'imagemUrl'] })
                 // Criação dos registros de Monitor e Professor
                 const monitor = await Monitor.create({
                     nome: req.body.monitorREQ,
-                    email: "TESTE"
+                    email: "TESTE",
+                    materia:id_materia.nome
                 })
                 
                 const professor = await Professor.create({
@@ -267,7 +265,7 @@ const { Sequelize } = require('sequelize')
                 
                 const id_moni = monitor.id
                 const id_prof = professor.id 
-                const id_materia = await Materia.findOne({ where: { id: req.body.materiaREQ } })
+                
 
                 console.log(`ID MONITOR >>> ${id_moni}`);
                 console.log(`ID PROFESSOR >>> ${id_prof}`);
@@ -283,14 +281,15 @@ const { Sequelize } = require('sequelize')
 
                     
                     if (verify.length === 0) {
-                    
-                    console.log("NAO TEM !! " + id_materia.nome);
-                    
+                    const imagem = await Materia.findOne({ where: { id: req.body.materiaREQ },
+                        attributes: ['id', 'nome', 'imagemUrl'] })
+                    console.error("IMAGEM>."+imagem.imagemUrl)
                     // Adicionar a nova matéria
                     await Existente.create({
                         nome: id_materia.nome, 
-                        imagemUrl: 'https://images.pexels.com/photos/28706618/pexels-photo-28706618.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'
+                        imagemUrl: imagem.imagemUrl
                     });
+                    
                     console.log("Matéria adicionada: " + id_materia.nome);
                     
                     } else {
@@ -307,7 +306,7 @@ const { Sequelize } = require('sequelize')
                     horario: req.body.horarioREQ,
                     dia: req.body.diaREQ,
                     local: req.body.localREQ,
-                    imagemUrl: 'https://images.pexels.com/photos/28706618/pexels-photo-28706618.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
+                    imagemUrl: id_materia.imagemUrl,
                     descricao: req.body.descricaoREQ,
                     professorId: id_prof,
                     monitorId: id_moni,

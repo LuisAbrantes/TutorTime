@@ -5,7 +5,7 @@
     const handlebars = require('express-handlebars')
 //Banco de dados
     const tutortime = require('./models/dados')
-const { Sequelize } = require('sequelize')
+    const { Sequelize } = require('sequelize')
     //Tabelas    
         const Monitorias = tutortime.Monitoria
         const Professor= tutortime.Professor
@@ -14,7 +14,21 @@ const { Sequelize } = require('sequelize')
         const Materia = tutortime.Materia
         const Existente = tutortime.Existente
         let c = 1
+    //Multer(upload de arquivos)
+        const multer = require('multer')
+        
+        const path = require('path')
 
+        const storage = multer.diskStorage({
+            destination: (req, file, cb) => {
+              cb(null, '/uploads');  // Define o diretório público para as imagens
+            },
+            filename: (req, file, cb) => {
+              cb(null, Date.now() + path.extname(file.originalname));  // Define o nome do arquivo
+            }
+          });
+
+          const upload = multer({ storage: storage })
 //TESTE
     /*const todasDisciplinas = [
         // Original
@@ -155,6 +169,8 @@ const { Sequelize } = require('sequelize')
 
         app.set('view engine','handlebars')
 
+        // Pastas Publicas'
+        app.use(express.static('uploads'))
         app.use(express.static('css'))      
 
     //BodyParser
@@ -189,9 +205,12 @@ const { Sequelize } = require('sequelize')
                 res.render('src/about/about')
         })
         
+    //          SENHA
+        app.get("/manage",async function (req,res) {
+            res.render('src/senha')
+        })
     //          MANAGE
-
-        app.get("/manage", function(req, res) {
+        app.get("/manage/:senha", function(req, res) {
             Materia.findAll().then(function(materias) {
                 Monitorias.findAll({
                     include: [
@@ -206,7 +225,13 @@ const { Sequelize } = require('sequelize')
                     ],
                     raw: false
                 }).then(function(monitorias) {
-                    res.render('src/manage/manage', { Monitorias: monitorias, Materia: materias });
+                    console.error("SENHA>>"+req.params.senha)
+                    if (req.params.senha=='True') {
+                        res.render('src/manage/manage', { Monitorias: monitorias, Materia: materias });
+                    }else{
+                        alert("ERRADA")
+                        res.render('src/home/index')
+                    }
                 }).catch(function(error) {
                     console.error('Erro ao buscar monitorias:', error);
                     res.status(500).send('Erro ao carregar monitorias');
@@ -246,6 +271,29 @@ const { Sequelize } = require('sequelize')
 
     //         TESTE
 //Database
+    //Adicionando Matérias
+        app.get("/adicionar",async function (req,res)  {
+            Materia.findAll().then(function (materia) {
+                res.render("src/adicionar",{Materia:materia})
+            })
+        })
+
+        app.post("/addmat", async function (req, res) {
+            try {
+              // Salva o caminho da imagem no banco de dados
+              const novaMateria = await Materia.create({
+                nome: req.body.materiaREQ,
+                imagemUrl: req.body.imagemREQ // Salva o URL no banco de dados
+              })
+          
+              console.log("MATERIA CRIADA!", req.body.imagemREQ)
+              res.redirect("/manage/True")
+            }catch(erro){
+                console.error("ERRO>"+erro)
+                res.send(erro)
+            }
+          });
+
     //Criando monitorias
         app.post("/add", async function(req, res) {
             try {
@@ -314,7 +362,7 @@ const { Sequelize } = require('sequelize')
                 });
                 
                 
-                res.redirect('/manage');
+                res.redirect('/manage/True');
             } catch (erro) {
                 res.send("Deu Erro Boy >>>>> " + erro);
             }
@@ -361,7 +409,11 @@ const { Sequelize } = require('sequelize')
           
             Monitorias.destroy({where:{'id':req.params.id}})
             verificar()
-            res.redirect('/manage')
+            res.redirect('/manage/True')
+        })
+    //Deletando Matérias
+        app.get('/deletar/:id',async function(req,res){
+            
         })
 
 //Inicializando Servidor!

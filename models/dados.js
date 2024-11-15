@@ -83,7 +83,8 @@
                 allowNull: true,
             },
             imagemUrl:{
-                type:DataTypes.STRING
+                type:DataTypes.STRING,
+                allowNull:true
             }
         });
         /*

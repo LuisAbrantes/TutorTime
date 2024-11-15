@@ -23,7 +23,7 @@
     <header>
         <div class="logo">
             <div class="imageLogo">
-                <img src="logo.png" alt="Logo TutorTime">
+                <img src="/logo.png" alt="Logo TutorTime">
             </div>
             TutorTime - IFSP
         </div>
@@ -44,13 +44,17 @@
             <div class="inputs">
                 <form id="meuFormulario" action="/add" method="POST">
                     <div><!--Materia-->
-                        Materia <br>
+                        Disciplina<br>
                         <select name="materiaREQ" class="input">
                         {{#each Materia}}
                             <option value="{{id}}" name="materiaREQ">{{nome}}</option>
                         {{/each}}
                         </select>
+                        <div class="pequeno">
+                            <a href="/adicionar">Não encontrou sua disciplina?</a>
+                        </div>
                     </div>
+                    
                     
                     <div><!--Monitor-->
                         Monitor <br>
@@ -63,13 +67,8 @@
                     </div>
 
                     <div><!--Local-->
-                        Local
-                        <select name="localREQ" class="input">
-                            <option value="Sala1"> Sala 1 </option>
-                            <option value="Sala2"> Sala 2 </option>
-                            <option value="Sala3"> Sala 3 </option>
-                            <!--Salas...-->
-                        </select>
+                        Local ou Link
+                        <input type="text" name="localREQ" class="input" >
                     </div>
 
                     <div><!--Dia-->

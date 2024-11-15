@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="senha">
+        <div class="listadematerias">   
+            {{#each Materia}}
+                {{nome}}
+                <hr>
+            {{/each}}
+        </div>
+        <div class="inline">
+            <form action="/addmat" method="POST">
+                <div><!--Nome-->
+                    Nome:
+                    <input type="text" name="materiaREQ"><br>
+                </div>
+
+                <div><!--Imagem-->
+                    Imagem
+                    <input type="text" name="imagemREQ">
+                </div>
+                
+                <button type="submit">ADICIONAR</button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

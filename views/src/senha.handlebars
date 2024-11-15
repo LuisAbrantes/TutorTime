@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="senha">
+        <b class="grande">SENHA : </b>
+        <form onsubmit="redirecionamento(event)">
+            
+            <input type="text" id="senha" name="senha" class="inputsenha">
+           
+            <button type="submit" class="adicionarsenha">Verificar</button>
+        </form>
+    </div>
+    <script>
+        function redirecionamento(event) {
+        event.preventDefault(); // Evita que o formulário seja enviado tradicionalmente
+        const id = document.getElementById('senha').value;
+        if (id) {
+            window.location.href = `manage/${id}`; // Substitua pelo seu site
+        } else {
+            alert('Por favor, insira uma Senha.');
+        }
+        }
+  </script>
+</body>
+</html>

@@ -1,10 +1,12 @@
 //Frameworks etc...
-    const express = require('express')
-    const app = express()
-    const bodyParser = require('body-parser')
-    const handlebars = require('express-handlebars')
+    const express = require('express')// Usado para gerenciar e manipular rotas
+    const app = express()//  ^^^
+    const bodyParser = require('body-parser')//Usado para requisitar dados do body
+    const handlebars = require('express-handlebars')//Usado para definir templates e passar informações
+    const chalk = require('chalk')
+    console.log(chalk.red("VERMELHO"))
 //Banco de dados
-    const tutortime = require('./models/dados')
+    const tutortime = require('./models/dados') 
     const { Sequelize } = require('sequelize')
     //Tabelas    
         const Monitorias = tutortime.Monitoria
@@ -14,139 +16,6 @@
         const Materia = tutortime.Materia
         const Existente = tutortime.Existente
         let c = 1
-    //Multer(upload de arquivos)
-        const multer = require('multer')
-        
-        const path = require('path')
-
-        const storage = multer.diskStorage({
-            destination: (req, file, cb) => {
-              cb(null, '/uploads');  // Define o diretório público para as imagens
-            },
-            filename: (req, file, cb) => {
-              cb(null, Date.now() + path.extname(file.originalname));  // Define o nome do arquivo
-            }
-          });
-
-          const upload = multer({ storage: storage })
-//TESTE
-    /*const todasDisciplinas = [
-        // Original
-        'Algoritmos e Lógica de Programação',
-        'Programação Orientada a Objetos',
-        'Estruturas de Dados',
-        'Banco de Dados',
-        'Sistemas Operacionais',
-        'Redes de Computadores',
-        'Engenharia de Software',
-        'Desenvolvimento Web',
-        'Inteligência Artificial',
-        'Análise e Projeto de Sistemas',
-        'Teoria da Computação',
-        'Matemática Discreta',
-        'Cálculo',
-        'Física',
-        'Química',
-        'Educação Física',
-        'Inglês',
-        'Empreendedorismo',
-        'Ética e Cidadania',
-        'Arquitetura',
-        'Design de Interiores',
-        
-        // Maiúsculas
-        'ALGORITMOS E LÓGICA DE PROGRAMAÇÃO',
-        'PROGRAMAÇÃO ORIENTADA A OBJETOS',
-        'ESTRUTURAS DE DADOS',
-        'BANCO DE DADOS',
-        'SISTEMAS OPERACIONAIS',
-        'REDES DE COMPUTADORES',
-        'ENGENHARIA DE SOFTWARE',
-        'DESENVOLVIMENTO WEB',
-        'INTELIGÊNCIA ARTIFICIAL',
-        'ANÁLISE E PROJETO DE SISTEMAS',
-        'TEORIA DA COMPUTAÇÃO',
-        'MATEMÁTICA DISCRETA',
-        'CÁLCULO',
-        'FÍSICA',
-        'QUÍMICA',
-        'EDUCAÇÃO FÍSICA',
-        'INGLÊS',
-        'EMPREENDEDORISMO',
-        'ÉTICA E CIDADANIA',
-        'ARQUITETURA',
-        'DESIGN DE INTERIORES',
-        
-        // Minúsculas
-        'algoritmos e lógica de programação',
-        'programação orientada a objetos',
-        'estruturas de dados',
-        'banco de dados',
-        'sistemas operacionais',
-        'redes de computadores',
-        'engenharia de software',
-        'desenvolvimento web',
-        'inteligência artificial',
-        'análise e projeto de sistemas',
-        'teoria da computação',
-        'matemática discreta',
-        'cálculo',
-        'física',
-        'química',
-        'educação física',
-        'inglês',
-        'empreendedorismo',
-        'ética e cidadania',
-        'arquitetura',
-        'design de interiores',
-        
-        // Capitalizadas
-        'Algoritmos E Lógica De Programação',
-        'Programação Orientada A Objetos',
-        'Estruturas De Dados',
-        'Banco De Dados',
-        'Sistemas Operacionais',
-        'Redes De Computadores',
-        'Engenharia De Software',
-        'Desenvolvimento Web',
-        'Inteligência Artificial',
-        'Análise E Projeto De Sistemas',
-        'Teoria Da Computação',
-        'Matemática Discreta',
-        'Cálculo',
-        'Física',
-        'Química',
-        'Educação Física',
-        'Inglês',
-        'Empreendedorismo',
-        'Ética E Cidadania',
-        'Arquitetura',
-        'Design De Interiores',
-        
-        // Primeira palavra
-        'Algoritmos',
-        'Programação',
-        'Estruturas',
-        'Banco',
-        'Sistemas',
-        'Redes',
-        'Engenharia',
-        'Desenvolvimento',
-        'Inteligência',
-        'Análise',
-        'Teoria',
-        'Matemática',
-        'Cálculo',
-        'Física',
-        'Química',
-        'Educação',
-        'Inglês',
-        'Empreendedorismo',
-        'Ética',
-        'Arquitetura',
-        'Design',
-        'Administração'
-    ];*/
 
 //-Config⚙️
     //Template Engine
@@ -156,20 +25,19 @@
                 allowedProtoProperties: true,
                 allowProtoPropertiesByDefault: true
             },
-            helpers: {
-                // Helper ifCond para comparar valores
-                ifCond: function(v1, v2, options) {
+            helpers: { 
+                ifCond: function(v1, v2, options) { //Definir IF
                     if (v1 === v2) {
-                        return options.fn(this);  // Se a comparação for verdadeira, executa o bloco {{#ifCond}}
+                        return options.fn(this);  
                     }
-                    return options.inverse(this);  // Caso contrário, executa o bloco {{else}} (ou retorna vazio)
+                    return options.inverse(this);  
                 }
             }
         }));
 
-        app.set('view engine','handlebars')
+        app.set('view engine','handlebars')//Definindo engine como HANDLEBARS
 
-        // Pastas Publicas'
+    //Pastas Publicas
         app.use(express.static('uploads'))
         app.use(express.static('css'))      
 
@@ -178,14 +46,17 @@
         app.use(bodyParser.json())
 
 //Rotas
+
     //          HOME
         app.get("/home",function(req,res){
-            let primeiro =""
-            async function one() {
 
+            let primeiro =""
+
+            async function one() {
                  primeiro = await Existente.findOne({order:[['id','ASC']]})
             }
             one()
+
             Existente.findAll({order:[['id','ASC']],offset:1}).then(function(existente){
                 if(primeiro===null){
                     primeiro = 
@@ -193,24 +64,28 @@
                             nome:"Sem Monitorias",
                             imagemUrl:'https://images.pexels.com/photos/949587/pexels-photo-949587.jpeg?auto=compress&cs=tinysrgb&w=600'
                         }
-                   
                 }
                 console.error(primeiro.nome)
                 res.render('src/home/index',{Existente:existente,primeiro:primeiro})
             })
+
         })
     
     //          ABOUT
         app.get("/about",function(req,res){
+
                 res.render('src/about/about')
         })
         
     //          SENHA
         app.get("/manage",async function (req,res) {
+
             res.render('src/senha')
         })
+
     //          MANAGE
         app.get("/manage/:senha", function(req, res) {
+
             Materia.findAll().then(function(materias) {
                 Monitorias.findAll({
                     include: [
@@ -221,18 +96,28 @@
                         {
                             model: Professor,
                             as: 'Professor'
+                        },
+                        {
+                            model:Monitor,
+                            as:'Monitor'
                         }
                     ],
                     raw: false
+
                 }).then(function(monitorias) {
+
                     console.error("SENHA>>"+req.params.senha)
+
                     if (req.params.senha=='True') {
+
                         res.render('src/manage/manage', { Monitorias: monitorias, Materia: materias });
                     }else{
-                        alert("ERRADA")
+
                         res.render('src/home/index')
                     }
+
                 }).catch(function(error) {
+
                     console.error('Erro ao buscar monitorias:', error);
                     res.status(500).send('Erro ao carregar monitorias');
                 });
@@ -242,10 +127,14 @@
     
 
     //          HOME >>> MATERIA
+
         app.get("/home/:materia", function(req, res) {
+
             async function desId() {
+
                 const id_materia = await Materia.findOne({where:{nome:req.params.materia}})
                     if(id_materia!=null){
+
                         Monitorias.findAll({
                             where:{materiaId:id_materia.id},
                             include: [{
@@ -266,19 +155,31 @@
                         })
                     }
             }
+
             desId()
         })
 
     //         TESTE
 //Database
+    //Adicionando Inscrições
+        app.get("/inscrito/:id",async function (req,res) {
+
+            const valorantigo = await Monitorias.findOne({where:{id:req.params.id}})
+            const valor = valorantigo.inscricoes
+
+            Monitorias.update({inscricoes:valor+1},{where:{id:req.params.id}})
+            res.redirect("/home")
+        })
     //Adicionando Matérias
         app.get("/adicionar",async function (req,res)  {
+
             Materia.findAll().then(function (materia) {
                 res.render("src/adicionar",{Materia:materia})
             })
         })
 
         app.post("/addmat", async function (req, res) {
+
             try {
               // Salva o caminho da imagem no banco de dados
               const novaMateria = await Materia.create({
@@ -288,7 +189,9 @@
           
               console.log("MATERIA CRIADA!", req.body.imagemREQ)
               res.redirect("/manage/True")
+
             }catch(erro){
+
                 console.error("ERRO>"+erro)
                 res.send(erro)
             }
@@ -296,9 +199,11 @@
 
     //Criando monitorias
         app.post("/add", async function(req, res) {
+
             try {
                 const id_materia = await Materia.findOne({ where: { id: req.body.materiaREQ },
                     attributes: ['id', 'nome', 'imagemUrl'] })
+
                 // Criação dos registros de Monitor e Professor
                 const monitor = await Monitor.create({
                     nome: req.body.monitorREQ,
@@ -313,10 +218,6 @@
                 
                 const id_moni = monitor.id
                 const id_prof = professor.id 
-                
-
-                console.log(`ID MONITOR >>> ${id_moni}`);
-                console.log(`ID PROFESSOR >>> ${id_prof}`);
 
                 async function verificarEAdicionarMateria(id_materia) {
                 try {
@@ -332,7 +233,7 @@
                     const imagem = await Materia.findOne({ where: { id: req.body.materiaREQ },
                         attributes: ['id', 'nome', 'imagemUrl'] })
                     console.error("IMAGEM>."+imagem.imagemUrl)
-                    // Adicionar a nova matéria
+                    // Adicionar a nova monitoria
                     await Existente.create({
                         nome: id_materia.nome, 
                         imagemUrl: imagem.imagemUrl
@@ -367,25 +268,6 @@
                 res.send("Deu Erro Boy >>>>> " + erro);
             }
             });
-    
-        /*
-        +-------------+--------------+------+-----+---------+----------------+
-        | Field       | Type         | Null | Key | Default | Extra          |
-        +-------------+--------------+------+-----+---------+----------------+
-        | id          | int          | NO   | PRI | NULL    | auto_increment |
-        | inscricoes  | int          | YES  |     | 0       |                |
-        | horario     | time         | NO   |     | NULL    |                |
-        | dia         | varchar(255) | NO   |     | NULL    |                |
-        | local       | varchar(255) | NO   |     | NULL    |                |
-        | imagemUrl   | varchar(255) | YES  |     | NULL    |                |
-        | descricao   | text         | YES  |     | NULL    |                |
-        | professorId | int          | YES  | MUL | NULL    |                |
-        | monitorId   | int          | YES  | MUL | NULL    |                |
-        | materiaId   | int          | YES  | MUL | NULL    |                |
-        | createdAt   | datetime     | NO   |     | NULL    |                |
-        | updatedAt   | datetime     | NO   |     | NULL    |                |
-        +-------------+--------------+------+-----+---------+----------------+
-        */
 
     //Deletando Monitorias
         app.get('/deletar/:id',function(req,res){
@@ -412,9 +294,33 @@
             res.redirect('/manage/True')
         })
     //Deletando Matérias
-        app.get('/deletar/:id',async function(req,res){
-            
-        })
+    app.get('/deletarmat/:id', async function(req, res) {
+        try {
+          const materiaId = req.params.id
+    
+          await Monitorias.destroy({
+            where: { materiaId: materiaId }
+          })
+      
+          const nomemat = await Materia.findOne({
+            where: { id: materiaId }
+          })
+      
+          await Materia.destroy({
+            where: { id: materiaId }
+          })
+      
+          await Existente.destroy({
+            where: { nome: nomemat.nome }
+          })
+      
+          res.redirect('/adicionar')
+        } catch (error) {
+          console.error('Erro ao excluir matéria:', error)
+          res.status(500).send('Erro ao excluir matéria.')
+        }
+      })
+      
 
 //Inicializando Servidor!
     app.listen(3000)

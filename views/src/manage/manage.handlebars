@@ -29,7 +29,7 @@
         </div>
         <ul class="menu">
             <li><a href="/home">Home</a></li>
-            <li><a href="about">About</a></li>
+            <li><a href="/about">About</a></li>
             <li><a href="#">Manage</a></li>
         </ul>
     </header>
@@ -58,17 +58,17 @@
                     
                     <div><!--Monitor-->
                         Monitor <br>
-                        <input type="text" name="monitorREQ" class="input">
+                        <input type="text" name="monitorREQ" class="input" required>
                     </div>
 
                     <div><!--Professor-->
                         Professor <br>
-                        <input type="text" name="professorREQ" class="input" >
+                        <input type="text" name="professorREQ" class="input" required>
                     </div>
 
                     <div><!--Local-->
                         Local ou Link
-                        <input type="text" name="localREQ" class="input" >
+                        <input type="text" name="localREQ" class="input" required>
                     </div>
 
                     <div><!--Dia-->
@@ -84,12 +84,12 @@
 
                     <div><!--Horario-->
                         Horario <br>
-                        <input type="time" class="input" name="horarioREQ">
+                        <input type="time" class="input" name="horarioREQ"required>
                     </div> 
                     
                     <div><!--Descricao-->
                         Descricao <br>
-                        <input type="text" class="desc" name="descricaoREQ">
+                        <input type="text" class="desc" name="descricaoREQ"required>
                     </div> <br>
 
                     <button type="submit" class="adicionar">Adicionar</button>
@@ -106,7 +106,7 @@
                 <div class="monitoria"> <!--Foto-->
                     <img src={{imagemUrl}} class="imagem"> <!-- Substitua por imagemUrl -->
                 </div>
-
+                <br>
                 <div class="monitoria">
                     Materia: 
                     {{#if Materia}}
@@ -115,7 +115,7 @@
                         Matéria não encontrada.
                     {{/if}}
                 </div>
-
+                <br>
                 <div class="monitoria"> <!--Professor-->
                     Professor: 
                     {{#if Professor}}
@@ -124,27 +124,35 @@
                        Professor não encontrado.
                     {{/if}} <!-- Alterado para acessar o nome do professor -->
                 </div>
-
+                <br>
                 <div class="monitoria"> <!--Monitor-->
-                    Monitor : {{monitor.nome}} <!-- Alterado para acessar o nome do monitor -->
-                </div>
-
-                <div class="monitoria"> <!--Dia e horário-->
-                    Dia / Hrs : {{dia}} / {{horario}} <!-- Exibe o dia e horário -->
-                </div>
-                
-                <div class="monitoria"> <!--Sala-->
-                    Sala / Link : {{local}} <!-- Exibe o local da sala -->
+                    Monitor : {{#if Monitor}}
+                        {{Monitor.nome}} <!-- Aqui estamos acessando corretamente o nome da matéria -->
+                    {{else}}
+                       Monitor não encontrado.
+                    {{/if}} <!-- Alterado para acessar o nome do monitor -->
                 </div>
                 <br>
+                <div class="monitoria"> <!--Dia e horário-->
+                    Dia / Hrs : {{dia}} ás {{horario}} <!-- Exibe o dia e horário -->
+                </div>
+                <br>
+                <div class="monitoria"> <!--Sala-->
+                    Sala / Link : {{local}} <!-- Exibe o local da sala -->
+                </div> <br>
                 <div class="monitoria">
-                    <a href="/deletar/{{id}}"><button>Apagar</button></a>
+                    Incrições : {{inscricoes}}
+                </div>
+                <br>
+                <div class="apagarM">
+                    <a href="/deletar/{{id}}" class="apagar">Apagar</a>
                 </div>
 
                 <br>
                 <hr>
             </div>
             {{/each}}
+            
         </div>
         
     </main>

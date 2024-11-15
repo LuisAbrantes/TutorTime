@@ -11,6 +11,8 @@
         <div class="listadematerias">   
             {{#each Materia}}
                 {{nome}}
+                <br>
+                <a href="/deletarmat/{{id}}" class="apagar">Deletar</a>
                 <hr>
             {{/each}}
         </div>
@@ -26,9 +28,12 @@
                     <input type="text" name="imagemREQ">
                 </div>
                 
-                <button type="submit">ADICIONAR</button>
+                <button type="submit" class="adicionarsenha">ADICIONAR</button>
             </form>
         </div>
+    </div>
+    <div>
+        <a href="/manage/True"><button class="botaomeio">Voltar</button></a>
     </div>
     
 </body>

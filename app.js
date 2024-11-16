@@ -45,7 +45,7 @@
         app.use(bodyParser.json())
 
 //Rotas
-
+    
     //          HOME
         app.get("/home",function(req,res){
             say(chalk.bgCyan("Entrou em Home"))
@@ -242,8 +242,6 @@
                     
                     
                     
-                    } else {
-                    console.log("TEM " + verify[0].nome); 
                     }
                 } catch (error) {
                     console.error('Erro ao verificar e adicionar matéria:', error);
@@ -322,6 +320,11 @@
                 res.status(500).send('Erro ao excluir matéria.')
             }
         })
+    
+    //          404
+    app.use((req,res,next)=>{
+        res.render('src/erro')
+    })
       
 
 //Inicializando Servidor!

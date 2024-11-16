@@ -1,23 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciar Disciplinas - TutorTime</title>
+    <title>IFSP - TutorTime</title>
     <link rel="stylesheet" href="/style.css">
-    <style>
-        .monitoria{
-            font-size: 20px;
-            display: inline-block;
-            position: flex;
-        }
-        .imagem{
-            width: 150px;
-            height: 150px;
-            image-resolution: 100%;
-            border-radius: 10px;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -25,131 +11,94 @@
             <div class="imageLogo">
                 <img src="/logo.png" alt="Logo TutorTime">
             </div>
-            TutorTime - IFSP
+            <h1>TutorTime - IFSP</h1>
         </div>
         <ul class="menu">
             <li><a href="/home">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="#">Manage</a></li>
+            <li><a href="/about">Sobre</a></li>
+            <li><a href="#">Gerenciar</a></li>
         </ul>
     </header>
 
-    <main>
-        <h1 style="text-align: center;">Gerenciar Monitorias</h1>
-        <div class="bloco">
-            <div class="meio">
-                <h1>Adicionar Monitoria</h1>
-            </div>
-            
-            <div class="inputs">
-                <form id="meuFormulario" action="/add" method="POST">
-                    <div><!--Materia-->
-                        Disciplina<br>
-                        <select name="materiaREQ" class="input">
-                        {{#each Materia}}
-                            <option value="{{id}}" name="materiaREQ">{{nome}}</option>
-                        {{/each}}
-                        </select>
-                        <div class="pequeno">
-                            <a href="/adicionar">Não encontrou sua disciplina?</a>
-                        </div>
-                    </div>
-                    
-                    
-                    <div><!--Monitor-->
-                        Monitor <br>
-                        <input type="text" name="monitorREQ" class="input" required>
-                    </div>
+    <main class="manage-section">
+        <!-- Botão para exibir o formulário -->
+        <button id="toggleFormButton">Adicionar Monitoria</button>
 
-                    <div><!--Professor-->
-                        Professor <br>
-                        <input type="text" name="professorREQ" class="input" required>
-                    </div>
+        <!-- Formulário em modal -->
+        <div id="newSubjectForm" style="display:none;">
+            <button class="close-button" onclick="toggleForm()">×</button>
+            <h2>Adicionar Monitoria</h2>
+            <form id="meuFormulario" action="/add" method="POST">
+                <!-- Seleção de disciplina -->
+                <select name="materiaREQ" class="input" required>
+                    <option value="" disabled selected>Selecione a disciplina</option>
+                    {{#each Materia}}
+                        <option value="{{id}}">{{nome}}</option>
+                    {{/each}}
+                </select>
+                <div class="pequeno">
+                    <a href="/adicionar">Não encontrou sua disciplina?</a>
+                </div>
 
-                    <div><!--Local-->
-                        Local ou Link
-                        <input type="text" name="localREQ" class="input" required>
-                    </div>
+                <!-- Campos de texto -->
+                <input type="text" name="monitorREQ" class="input" placeholder="Monitor" required>
+                <input type="text" name="professorREQ" class="input" placeholder="Professor" required>
+                <input type="text" name="localREQ" class="input" placeholder="Local ou Link" required>
 
-                    <div><!--Dia-->
-                        Dia <br>
-                        <select name="diaREQ" class="input">
-                            <option value="Segunda">Segunda-Feira</option>
-                            <option value="Terça-Feira">Terça-Feira</option>
-                            <option value="Quarta-Feira">Quarta-Feira</option>
-                            <option value="Quinta-Feira">Quinta-Feira</option>
-                            <option value="Sexta-Feira">Sexta-Feira</option>
-                        </select>
-                    </div>
+                <!-- Seleção de dia -->
+                <select name="diaREQ" class="input" required>
+                    <option value="" disabled selected>Selecione o dia</option>
+                    <option value="Segunda">Segunda-Feira</option>
+                    <option value="Terça-Feira">Terça-Feira</option>
+                    <option value="Quarta-Feira">Quarta-Feira</option>
+                    <option value="Quinta-Feira">Quinta-Feira</option>
+                    <option value="Sexta-Feira">Sexta-Feira</option>
+                </select>
 
-                    <div><!--Horario-->
-                        Horario <br>
-                        <input type="time" class="input" name="horarioREQ"required>
-                    </div> <br> <br>
+                <!-- Campo de horário -->
+                <input type="time" class="input" name="horarioREQ" required>
 
-                    <button type="submit" class="adicionar">Adicionar</button>
-                </form>
-            </div>
+                <!-- Botão de submissão -->
+                <button type="submit" class="adicionar">Adicionar</button>
+            </form>
         </div>
+
+        <!-- Lista de Monitorias -->
         <div id="ListaDeMonitorias" class="listadisciplinas">
-            <!-- Lista de disciplinas será gerada aqui -->
-            <h1 style=" padding-left: 20px;color:black">
-                Monitorias
-            </h1>
+            <h1>Monitorias</h1>
             {{#each Monitorias}}
-            <div id="monitoria_mae" class="monitoria_mae">
-                <div class="monitoria"> <!--Foto-->
-                    <img src={{imagemUrl}} class="imagem"> <!-- Substitua por imagemUrl -->
-                </div>
-                <br>
+            <div class="monitoria_mae">
+                <!-- Botão para apagar monitoria -->
+                
                 <div class="monitoria">
-                    Materia: 
-                    {{#if Materia}}
-                    {{Materia.nome}} <!-- Aqui estamos acessando corretamente o nome da matéria -->
-                    {{else}}
-                        Matéria não encontrada.
-                    {{/if}}
+                    
+                    <!-- Imagem da monitoria -->
+                    <img src="{{imagemUrl}}" class="imagemCirculo">
+                    <!-- Informações da monitoria -->
+                    <h3>{{#if Materia}}{{Materia.nome}}{{else}}Matéria não encontrada{{/if}}</h3>
+                    <p><strong>Professor:</strong> {{#if Professor}}{{Professor.nome}}{{else}}Professor não encontrado{{/if}}</p>
+                    <p><strong>Monitor:</strong> {{#if Monitor}}{{Monitor.nome}}{{else}}Monitor não encontrado{{/if}}</p>
+                    <p><strong>Dia/Horário:</strong> {{dia}} às {{horario}}</p>
+                    <p><strong>Local/Link:</strong> {{local}}</p>
+                    <p><strong>Inscrições:</strong> {{inscricoes}}</p>
                 </div>
-                <br>
-                <div class="monitoria"> <!--Professor-->
-                    Professor: 
-                    {{#if Professor}}
-                        {{Professor.nome}} <!-- Aqui estamos acessando corretamente o nome da matéria -->
-                    {{else}}
-                       Professor não encontrado.
-                    {{/if}} <!-- Alterado para acessar o nome do professor -->
-                </div>
-                <br>
-                <div class="monitoria"> <!--Monitor-->
-                    Monitor : {{#if Monitor}}
-                        {{Monitor.nome}} <!-- Aqui estamos acessando corretamente o nome da matéria -->
-                    {{else}}
-                       Monitor não encontrado.
-                    {{/if}} <!-- Alterado para acessar o nome do monitor -->
-                </div>
-                <br>
-                <div class="monitoria"> <!--Dia e horário-->
-                    Dia / Hrs : {{dia}} ás {{horario}} <!-- Exibe o dia e horário -->
-                </div>
-                <br>
-                <div class="monitoria"> <!--Sala-->
-                    Sala / Link : {{local}} <!-- Exibe o local da sala -->
-                </div> <br>
-                <div class="monitoria">
-                    Incrições : {{inscricoes}}
-                </div>
-                <br>
                 <div class="apagarM">
                     <a href="/deletar/{{id}}" class="apagar">Apagar</a>
                 </div>
-
-                <br>
-                <hr>
             </div>
             {{/each}}
-            
         </div>
-        
     </main>
+
+    <!-- Script para exibir/esconder o formulário -->
+    <script>
+        function toggleForm() {
+            const form = document.getElementById('newSubjectForm');
+            form.style.display = (form.style.display === 'block') ? 'none' : 'block';
+        }
+        document.getElementById('toggleFormButton').addEventListener('click', toggleForm);
+        
+ 
+    </script>
 </body>
 </html>

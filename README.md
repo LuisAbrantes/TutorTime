@@ -57,7 +57,8 @@ O TutorTime é uma plataforma web desenvolvida para facilitar o gerenciamento de
 
 <h3>Diagrama ER</h3>
 
-Imagem do diagrama ER.
+![Capturar](https://github.com/user-attachments/assets/b8d3a3aa-39fa-42f8-b037-f302d9b6ba79)
+
 
 <h3>Definição das Tabelas</h3>
 

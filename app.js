@@ -4,7 +4,7 @@
     const bodyParser = require('body-parser')//Usado para requisitar dados do body
     const handlebars = require('express-handlebars')//Usado para definir templates e passar informações
     const chalk = require('chalk')
-    console.log(chalk.red("VERMELHO"))
+    const say =console.log
 //Banco de dados
     const tutortime = require('./models/dados') 
     const { Sequelize } = require('sequelize')
@@ -12,7 +12,6 @@
         const Monitorias = tutortime.Monitoria
         const Professor= tutortime.Professor
         const Monitor= tutortime.Monitor
-        const Inscricao= tutortime.Inscricao
         const Materia = tutortime.Materia
         const Existente = tutortime.Existente
         let c = 1
@@ -49,7 +48,8 @@
 
     //          HOME
         app.get("/home",function(req,res){
-
+            say(chalk.bgCyan("Entrou em Home"))
+            say(chalk.black("---------------"))
             let primeiro =""
 
             async function one() {
@@ -65,7 +65,6 @@
                             imagemUrl:'https://images.pexels.com/photos/949587/pexels-photo-949587.jpeg?auto=compress&cs=tinysrgb&w=600'
                         }
                 }
-                console.error(primeiro.nome)
                 res.render('src/home/index',{Existente:existente,primeiro:primeiro})
             })
 
@@ -73,19 +72,22 @@
     
     //          ABOUT
         app.get("/about",function(req,res){
-
-                res.render('src/about/about')
+            say(chalk.bgCyan("Entrou em About"))
+            say(chalk.black("---------------"))
+            res.render('src/about/about')
         })
         
     //          SENHA
         app.get("/manage",async function (req,res) {
-
+            say(chalk.bgCyan("Entrou em Senha"))
+            say(chalk.black("---------------"))
             res.render('src/senha')
         })
 
     //          MANAGE
         app.get("/manage/:senha", function(req, res) {
-
+            say(chalk.bgCyan("Entrou em Manage"))
+            say(chalk.black("---------------"))
             Materia.findAll().then(function(materias) {
                 Monitorias.findAll({
                     include: [
@@ -106,14 +108,12 @@
 
                 }).then(function(monitorias) {
 
-                    console.error("SENHA>>"+req.params.senha)
-
                     if (req.params.senha=='True') {
 
                         res.render('src/manage/manage', { Monitorias: monitorias, Materia: materias });
                     }else{
 
-                        res.render('src/home/index')
+                        res.redirect("/home")
                     }
 
                 }).catch(function(error) {
@@ -129,7 +129,8 @@
     //          HOME >>> MATERIA
 
         app.get("/home/:materia", function(req, res) {
-
+            say(chalk.bgCyan("Entrou em Materia"))
+            say(chalk.black("---------------"))
             async function desId() {
 
                 const id_materia = await Materia.findOne({where:{nome:req.params.materia}})
@@ -163,43 +164,44 @@
 //Database
     //Adicionando Inscrições
         app.get("/inscrito/:id",async function (req,res) {
-
+            
             const valorantigo = await Monitorias.findOne({where:{id:req.params.id}})
             const valor = valorantigo.inscricoes
-
+            say(chalk.bgCyan("Se inscreveu em "+valorantigo.nome))
+            say(chalk.black("---------------"))
             Monitorias.update({inscricoes:valor+1},{where:{id:req.params.id}})
             res.redirect("/home")
         })
     //Adicionando Matérias
         app.get("/adicionar",async function (req,res)  {
-
+            say(chalk.bgCyan("Adicionando Materia"))
+            say(chalk.black("---------------"))
             Materia.findAll().then(function (materia) {
                 res.render("src/adicionar",{Materia:materia})
             })
         })
 
         app.post("/addmat", async function (req, res) {
-
+            
             try {
               // Salva o caminho da imagem no banco de dados
               const novaMateria = await Materia.create({
                 nome: req.body.materiaREQ,
                 imagemUrl: req.body.imagemREQ // Salva o URL no banco de dados
               })
-          
-              console.log("MATERIA CRIADA!", req.body.imagemREQ)
+              say(chalk.bgCyan("Adicionou "+req.body.materiaREQ))
+              say(chalk.black("---------------"))
               res.redirect("/manage/True")
 
             }catch(erro){
-
-                console.error("ERRO>"+erro)
+                console.error("ERRO EM ADICIONAR MATERIA :"+erro)
                 res.send(erro)
             }
           });
 
     //Criando monitorias
         app.post("/add", async function(req, res) {
-
+            
             try {
                 const id_materia = await Materia.findOne({ where: { id: req.body.materiaREQ },
                     attributes: ['id', 'nome', 'imagemUrl'] })
@@ -232,14 +234,13 @@
                     if (verify.length === 0) {
                     const imagem = await Materia.findOne({ where: { id: req.body.materiaREQ },
                         attributes: ['id', 'nome', 'imagemUrl'] })
-                    console.error("IMAGEM>."+imagem.imagemUrl)
                     // Adicionar a nova monitoria
                     await Existente.create({
                         nome: id_materia.nome, 
                         imagemUrl: imagem.imagemUrl
                     });
                     
-                    console.log("Matéria adicionada: " + id_materia.nome);
+                    
                     
                     } else {
                     console.log("TEM " + verify[0].nome); 
@@ -261,11 +262,12 @@
                     monitorId: id_moni,
                     materiaId: id_materia.id
                 });
-                
+                say(chalk.bgCyan("Adicionou Monitoria de "+id_materia.nome))
+                say(chalk.black("---------------"))
                 
                 res.redirect('/manage/True');
             } catch (erro) {
-                res.send("Deu Erro Boy >>>>> " + erro);
+                res.send("ERRO EM CRIAR MONITORIA" + erro);
             }
             });
 
@@ -274,17 +276,16 @@
             
             async function verificar() {
                 const monitoriadele = await Monitorias.findOne({ where: { id: req.params.id } })
+                say(chalk.bgCyan("Deletou Monitoria"))
+                say(chalk.black("---------------"))
                 if(monitoriadele!=null){
                     const id_mat_monitoria = monitoriadele.materiaId
                     const materia = await Materia.findOne({where:{id:id_mat_monitoria}})
                     const id_materia = materia.id
-                    console.error(`${id_mat_monitoria} E ${id_materia}`)
                     const monitorias = await Monitorias.findAll({where:{materiaId:id_materia}})
                     if (monitorias.length===1) {
-                        console.error("NAO TEM MAIS")
                         Existente.destroy({where:{nome:materia.nome}})
                     }
-                    console.error("TEM ISSO DE MONITORIAS>>> "+monitorias.length)
                 }
                 
             }
@@ -294,34 +295,35 @@
             res.redirect('/manage/True')
         })
     //Deletando Matérias
-    app.get('/deletarmat/:id', async function(req, res) {
-        try {
-          const materiaId = req.params.id
-    
-          await Monitorias.destroy({
-            where: { materiaId: materiaId }
-          })
-      
-          const nomemat = await Materia.findOne({
-            where: { id: materiaId }
-          })
-      
-          await Materia.destroy({
-            where: { id: materiaId }
-          })
-      
-          await Existente.destroy({
-            where: { nome: nomemat.nome }
-          })
-      
-          res.redirect('/adicionar')
-        } catch (error) {
-          console.error('Erro ao excluir matéria:', error)
-          res.status(500).send('Erro ao excluir matéria.')
-        }
-      })
+        app.get('/deletarmat/:id', async function(req, res) {
+            try {
+                const materiaId = req.params.id
+            
+                await Monitorias.destroy({
+                    where: { materiaId: materiaId }
+                })
+            
+                const nomemat = await Materia.findOne({
+                    where: { id: materiaId }
+                })
+            
+                await Materia.destroy({
+                    where: { id: materiaId }
+                })
+            
+                await Existente.destroy({
+                    where: { nome: nomemat.nome }
+                })
+                say(chalk.bgCyan("Deletou Materia : "+nomemat.nome))
+                say(chalk.black("---------------"))
+                res.redirect('/adicionar')
+                } catch (error) {
+                console.error('Erro ao excluir matéria:', error)
+                res.status(500).send('Erro ao excluir matéria.')
+            }
+        })
       
 
 //Inicializando Servidor!
     app.listen(3000)
-    console.log("Server Rodando na porta 3000!")
+    say(chalk.blue("Server Rodando na porta 3000!"))

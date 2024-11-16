@@ -3,11 +3,17 @@
     const sequelize = new Sequelize('tutortime','root','123456',{
         host:'localhost',
         dialect:'mysql',
-        query:{raw:true}
+        query:{raw:true},
+        logging:false
     })
+    let contador =0
+//Chalk
+    const chalk = require('chalk')
+    const say =console.log
 
 //Tabelas
     //Professores
+
         const Professor = sequelize.define('Professor', {
             id: {
                 type: DataTypes.INTEGER,
@@ -22,7 +28,13 @@
                 type: DataTypes.STRING,
                 allowNull: true,
             }
-        });
+        })
+        if (Professor) {
+            contador++
+            say(chalk.yellow(`${contador}/5 `)+chalk.greenBright("Tabela ")+chalk.magenta("Professor ")+ chalk.greenBright("Criada com Sucesso!"))
+        }else{
+            say(chalk.redBright("Falha ao Criar Tabela Professor!"))
+        }
         /*
         +-----------+--------------+------+-----+---------+----------------+
         | Field     | Type         | Null | Key | Default | Extra          |
@@ -54,7 +66,14 @@
                 type:DataTypes.STRING,
                 allowNull:false,
             }
-        });
+        })
+        if (Monitor) {
+            contador++
+            say(chalk.yellow(`${contador}/5 `)+chalk.greenBright("Tabela ")+chalk.magenta("Monitor ")+ chalk.greenBright("Criada com Sucesso!"))
+        }else{
+            say(chalk.redBright("Falha ao Criar Tabela Monitor!"))
+        }
+
         /*
         +-----------+--------------+------+-----+---------+----------------+
         | Field     | Type         | Null | Key | Default | Extra          |
@@ -86,7 +105,13 @@
                 type:DataTypes.STRING,
                 allowNull:true
             }
-        });
+        })
+        if (Materia) {
+            contador++
+            say(chalk.yellow(`${contador}/5 `)+chalk.greenBright("Tabela ")+chalk.magenta("Materia ")+ chalk.greenBright("Criada com Sucesso!"))
+        }else{
+            say(chalk.redBright("Falha ao Criar Tabela Materia!"))
+        }
         /*
         +-----------+--------------+------+-----+---------+----------------+
         | Field     | Type         | Null | Key | Default | Extra          |
@@ -151,7 +176,13 @@
                     key: 'id',
                 },
             }
-        });
+        })
+        if (Monitoria) {
+            contador ++
+            say(chalk.yellow(`${contador}/5 `)+chalk.greenBright("Tabela ")+chalk.magenta("Monitoria ")+ chalk.greenBright("Criada com Sucesso!"))
+        }else{
+            say(chalk.redBright("Falha ao Criar Tabela Monitoria!"))
+        }
         /*
         +-------------+--------------+------+-----+---------+----------------+
         | Field       | Type         | Null | Key | Default | Extra          |
@@ -171,46 +202,7 @@
         +-------------+--------------+------+-----+---------+----------------+
         */
 
-    //Inscrições
-        const Inscricao = sequelize.define('Inscricao', {
-            id: {
-                type: DataTypes.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
-            },
-            nomeInscrito: {
-                type: DataTypes.STRING,
-                allowNull: false,
-            },
-            emailInscrito: {
-                type: DataTypes.STRING,
-                allowNull: true,
-            },
-            monitoriaId: {
-                type: DataTypes.INTEGER,
-                references: {
-                    model: Monitoria,
-                    key: 'id',
-                },
-            },
-            dataInscricao: {
-                type: DataTypes.DATE,
-                defaultValue: DataTypes.NOW,
-            },
-        });
-        /*
-        +---------------+--------------+------+-----+---------+----------------+
-        | Field         | Type         | Null | Key | Default | Extra          |
-        +---------------+--------------+------+-----+---------+----------------+
-        | id            | int          | NO   | PRI | NULL    | auto_increment |
-        | nomeInscrito  | varchar(255) | NO   |     | NULL    |                |
-        | emailInscrito | varchar(255) | YES  |     | NULL    |                |
-        | monitoriaId   | int          | YES  | MUL | NULL    |                |
-        | dataInscricao | datetime     | YES  |     | NULL    |                |
-        | createdAt     | datetime     | NO   |     | NULL    |                |
-        | updatedAt     | datetime     | NO   |     | NULL    |                |
-        +---------------+--------------+------+-----+---------+----------------+
-        */
+    //Monitorias Existentes
         const Existente = sequelize.define('Existente', {
             nome: {
               type: DataTypes.STRING,
@@ -220,6 +212,23 @@
                 type:DataTypes.STRING
             }
           })
+        if (Existente) {
+            contador++
+            say(chalk.yellow(`${contador}/5 `)+chalk.greenBright("Tabela ")+chalk.magenta("Existente ")+ chalk.greenBright("Criada com Sucesso!"))
+        }else{
+            say(chalk.redBright("Falha ao Criar Tabela Existente!"))
+        }
+        /*
+        +-----------+--------------+------+-----+---------+----------------+
+        | Field     | Type         | Null | Key | Default | Extra          |
+        +-----------+--------------+------+-----+---------+----------------+
+        | id        | int          | NO   | PRI | NULL    | auto_increment |
+        | nome      | varchar(255) | NO   |     | NULL    |                |
+        | imagemUrl | varchar(255) | YES  |     | NULL    |                |
+        | createdAt | datetime     | NO   |     | NULL    |                |
+        | updatedAt | datetime     | NO   |     | NULL    |                |
+        +-----------+--------------+------+-----+---------+----------------+
+        */
 
 
     //Definindo os relacionamentos
@@ -238,11 +247,6 @@
             as: 'Materia'
         });
 
-        Monitoria.hasMany(Inscricao, {
-            foreignKey: 'monitoriaId',
-            as: 'Inscricoes'
-        });
-
         Professor.hasMany(Monitoria, {
             foreignKey: 'professorId',
             as: 'Monitorias'
@@ -259,25 +263,20 @@
             as: 'Monitorias'
         });
 
-        Inscricao.belongsTo(Monitoria, {
-            foreignKey: 'monitoriaId',
-            as: 'Monitoria'
-        });
-
+        
 
 
 
     //Sincronizar todas as tabelas com o banco de dados
         sequelize.sync()
-            .then(() => console.log("Todas as tabelas foram criadas com sucesso"))
+            .then(() => say(chalk.yellow("Todas as tabelas foram criadas com sucesso")))
             .catch((error) => console.error("Erro ao criar tabelas:", error));
 
-            //Exportação
+//Exportação
     module.exports = { 
         Professor, 
         Monitor, 
         Materia, 
         Monitoria, 
-        Inscricao ,
         Existente
     };

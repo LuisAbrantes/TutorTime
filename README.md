@@ -57,7 +57,6 @@ O TutorTime é uma plataforma web desenvolvida para facilitar o gerenciamento de
 
 <h3>Diagrama ER</h3>
 
-![WorkBench](https://github.com/user-attachments/assets/5fa47b3c-2d48-402a-8736-9bf0ddc0c3d4)
 
 
 <h3>Definição das Tabelas</h3>
@@ -79,6 +78,7 @@ Liste das tabelas, campos, tipos de dados e restrições.
 • JavaScript: Interatividade e funcionalidades dinâmicas
 • Git: Controle de versão
 • GitHub: Hospedagem do repositório
+
 
 <h2>🎨 Design da Interface do Usuário</h2>
 

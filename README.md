@@ -57,7 +57,6 @@ O TutorTime é uma plataforma web desenvolvida para facilitar o gerenciamento de
 
 <h3>Diagrama ER</h3>
 
-![Capturar](https://github.com/user-attachments/assets/b8d3a3aa-39fa-42f8-b037-f302d9b6ba79)
 
 
 <h3>Definição das Tabelas</h3>
@@ -66,9 +65,11 @@ Liste das tabelas, campos, tipos de dados e restrições.
 
 <h2>🛠️ Arquitetura da Aplicação</h2>
 
-Diagrama de Arquitetura
+![Captura de tela 2024-10-31 150432](https://github.com/user-attachments/assets/5f1e6161-e98d-449a-9bd5-f99f8e264ca1)
+<h3>Arquitetura de Software</h3>
+![excalidraw](https://github.com/user-attachments/assets/051eeb80-5ff9-40ac-bd4b-5eed829b74e4)
 
-Imagem do diagrama de arquitetura da aplicação.
+
 
 <h2>⚛Tecnologias Utilizadas</h2>
 

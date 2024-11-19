@@ -1,6 +1,6 @@
 //Database
     const { Sequelize, DataTypes } = require('sequelize');
-    const sequelize = new Sequelize('tutortime','root','123456',{
+    const sequelize = new Sequelize('tutortime','luishsa','123456',{
         host:'localhost',
         dialect:'mysql',
         query:{raw:true},

@@ -37,18 +37,18 @@ O TutorTime é uma plataforma web desenvolvida para facilitar o gerenciamento de
 
 <h2>☑️ Requisitos do Sistema </h2>
 
-| Tipo                | Requisito                                                                                   |
-|---------------------|---------------------------------------------------------------------------------------------|
-| **Funcional**       | Visualização de Disciplinas: Sistema deve exibir as disciplinas disponíveis para monitoria   |
-| **Funcional**       | Gerenciamento de Conteúdo: Interface para adicionar/remover disciplinas                     |
-| **Funcional**       | Navegação Entre Páginas: Sistema de menu para acesso às diferentes seções                   |
-| **Funcional**       | Responsividade: Adaptação para diferentes dispositivos                                      |
-| **Funcional**       | Exibição de Informações: Cada monitoria deve mostrar seus detalhes específicos              |
-| **Não Funcional**   | Performance: Carregamento rápido das páginas e transições suaves                            |
-| **Não Funcional**   | Usabilidade: Interface intuitiva e fácil de usar                                            |
-| **Não Funcional**   | Responsividade: Adaptação para diferentes tamanhos de tela                                  |
-| **Não Funcional**   | Design: Interface moderna e agradável com tema dark                                         |
-| **Não Funcional**   | Manutenibilidade: Código organizado e bem estruturado                                       |
+| Tipo                | Subtópico                         | Descrição                                                                                   |
+|---------------------|-----------------------------------|---------------------------------------------------------------------------------------------|
+| **Funcional**       | Visualização de Disciplinas       | Sistema deve exibir as disciplinas disponíveis para monitoria                               |
+| **Funcional**       | Gerenciamento de Conteúdo         | Interface para adicionar/remover disciplinas                                                |
+| **Funcional**       | Navegação Entre Páginas           | Sistema de menu para acesso às diferentes seções                                            |
+| **Funcional**       | Responsividade                    | Adaptação para diferentes dispositivos                                                      |
+| **Funcional**       | Exibição de Informações           | Cada monitoria deve mostrar seus detalhes específicos                                       |
+| **Funcional**       | Manutenibilidade                  | Código organizado e bem estruturado                                                         |
+| **Não Funcional**   | Performance                       | Carregamento rápido das páginas e transições suaves                                         |
+| **Não Funcional**   | Usabilidade                       | Interface intuitiva e fácil de usar                                                         |
+| **Não Funcional**   | Design                            | Interface moderna e agradável com tema dark                                                 |
+| **Não Funcional**   | Segurança                         | Proteção contra ataques comuns                                                              |
 
 
 <h2>📊 Modelagem do Banco de Dados</h2>

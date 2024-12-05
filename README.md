@@ -35,7 +35,7 @@ O TutorTime é uma plataforma web desenvolvida para facilitar o gerenciamento de
 • Monitores que oferecem suporte nas disciplinas, divulgando suas monitorias de forma clara e objetiva para os alunos interessados.
 • Professores e coordenadores que acompanham as monitorias, para que o aluno possa saber o professor responsável a recorrer em casos de problemas.
 
-<h2> Requisitos do Sistema </h2>
+<h2>☑️ Requisitos do Sistema </h2>
 
 | Tipo                | Requisito                                                                                   |
 |---------------------|---------------------------------------------------------------------------------------------|

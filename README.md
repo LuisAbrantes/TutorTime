@@ -58,9 +58,40 @@ O TutorTime é uma plataforma web desenvolvida para facilitar o gerenciamento de
 ![image](https://github.com/user-attachments/assets/6cf9aef8-b360-49a4-b7d4-a1171c35e8fd)
 
 
-<h3>Definição das Tabelas</h3>
+<h2>📖 Dicionário de Dados</h2>
 
-Liste das tabelas, campos, tipos de dados e restrições.
+<h3>Entidade "professors"</h3>
+Essa entidade é necessária para - .
+ <br><br>
+ 
+- `id`: É um atributo do tipo INT. É o responsável por criar um **Id único** para o professor - (**CHAVE PRIMÁRIA**).
+- `nome`: É um atributo do tipo VARCHAR. É o responsável por armazenar o nome do professor.
+- `email`: É um atributo do tipo VARCHAR. É o responsável por armazenar o e-mail do professor.
+
+<h3>Entidade "subjects"</h3>
+Essa entidade é necessária para - .
+ <br><br>
+ 
+- `id`: É um atributo do tipo INT. É o responsável por criar um **Id único** para o professor - (**CHAVE PRIMÁRIA**).
+- `nome`: É um atributo do tipo VARCHAR. É o responsável por armazenar o nome do professor.
+- `email`: É um atributo do tipo VARCHAR. É o responsável por armazenar o e-mail do professor.
+
+<h3>Entidade "class"</h3>
+Essa entidade é necessária para - .
+ <br><br>
+ 
+- `id`: É um atributo do tipo INT. É o responsável por criar um **Id único** para o professor - (**CHAVE PRIMÁRIA**).
+- `nome`: É um atributo do tipo VARCHAR. É o responsável por armazenar o nome do professor.
+- `email`: É um atributo do tipo VARCHAR. É o responsável por armazenar o e-mail do professor.
+
+<h3>Entidade "tutors"</h3>
+Essa entidade é necessária para - .
+ <br><br>
+ 
+- `id`: É um atributo do tipo INT. É o responsável por criar um **Id único** para o professor - (**CHAVE PRIMÁRIA**).
+- `nome`: É um atributo do tipo VARCHAR. É o responsável por armazenar o nome do professor.
+- `email`: É um atributo do tipo VARCHAR. É o responsável por armazenar o e-mail do professor.
+  
 
 <h2>🛠️ Arquitetura da Aplicação</h2>
 

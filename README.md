@@ -35,23 +35,21 @@ O TutorTime é uma plataforma web desenvolvida para facilitar o gerenciamento de
 • Monitores que oferecem suporte nas disciplinas, divulgando suas monitorias de forma clara e objetiva para os alunos interessados.
 • Professores e coordenadores que acompanham as monitorias, para que o aluno possa saber o professor responsável a recorrer em casos de problemas.
 
-<h2>☑️ Requisitos do Sistema</h2>
+### Requisitos do Sistema
 
-<h3>Requisitos Funcionais</h3>
+| Tipo                | Requisito                                                                                   |
+|---------------------|---------------------------------------------------------------------------------------------|
+| **Funcional**       | Visualização de Disciplinas: Sistema deve exibir as disciplinas disponíveis para monitoria   |
+| **Funcional**       | Gerenciamento de Conteúdo: Interface para adicionar/remover disciplinas                     |
+| **Funcional**       | Navegação Entre Páginas: Sistema de menu para acesso às diferentes seções                   |
+| **Funcional**       | Responsividade: Adaptação para diferentes dispositivos                                      |
+| **Funcional**       | Exibição de Informações: Cada monitoria deve mostrar seus detalhes específicos              |
+| **Não Funcional**   | Performance: Carregamento rápido das páginas e transições suaves                            |
+| **Não Funcional**   | Usabilidade: Interface intuitiva e fácil de usar                                            |
+| **Não Funcional**   | Responsividade: Adaptação para diferentes tamanhos de tela                                  |
+| **Não Funcional**   | Design: Interface moderna e agradável com tema dark                                         |
+| **Não Funcional**   | Manutenibilidade: Código organizado e bem estruturado                                       |
 
-• Visualização de Disciplinas: Sistema deve exibir as disciplinas disponíveis para monitoria
-• Gerenciamento de Conteúdo: Interface para adicionar/remover disciplinas
-• Navegação Entre Páginas: Sistema de menu para acesso às diferentes seções
-• Responsividade: Adaptação para diferentes dispositivos
-• Exibição de Informações: Cada monitoria deve mostrar seus detalhes específicos
-
-<h3>Requisitos Não Funcionais</h3>
-
-• Performance: Carregamento rápido das páginas e transições suaves
-• Usabilidade: Interface intuitiva e fácil de usar
-• Responsividade: Adaptação para diferentes tamanhos de tela
-• Design: Interface moderna e agradável com tema dark, favorecendo usuários que preferem este estilo e aqueles com sensibilidade à luz forte
-• Manutenibilidade: Código organizado e bem estruturado
 
 <h2>📊 Modelagem do Banco de Dados</h2>
 

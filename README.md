@@ -47,7 +47,7 @@ O TutorTime é uma plataforma web desenvolvida para facilitar o gerenciamento de
 | **Funcional**       | Manutenibilidade                  | Código organizado e bem estruturado                                                         |
 | **Não Funcional**   | Performance                       | Carregamento rápido das páginas e transições suaves                                         |
 | **Não Funcional**   | Usabilidade                       | Interface intuitiva e fácil de usar                                                         |
-| **Não Funcional**   | Design                            | Interface moderna e agradável com tema dark                                                 |
+| **Não Funcional**   | Design                            | Interface moderna e agradável com alteração de tema light e dark                            |
 | **Não Funcional**   | Segurança                         | Proteção contra ataques comuns                                                              |
 
 

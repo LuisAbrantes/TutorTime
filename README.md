@@ -14,20 +14,15 @@
 
 O TutorTime é uma plataforma web desenvolvida para facilitar o gerenciamento de monitorias acadêmicas no IFSP-Jacareí. O sistema permite que alunos encontrem monitorias disponíveis em diferentes disciplinas e que monitores gerenciem suas ofertas de monitoria de forma simples e eficiente, apresentando informações detalhadas sobre cada disciplina para os **alunos interessados**.
 
-<h2>🔨 Funcionalidades do Projeto</h2>
+<h2>🔨 Funcionalidades e Escopo do Projeto ✖️</h2>
 
-• Visualização de Monitorias: Interface com slider para apresentação das disciplinas disponíveis
-• Gerenciamento de Disciplinas: Adição, edição e remoção de disciplinas no sistema
-• Páginas Específicas: Cada disciplina possui sua própria página com informações detalhadas sobre a monitoria, sendo elas: Professor responsável, monitor responsável, dias e horários de monitoria, sala/link de acesso.
-• Interface Responsiva: Design adaptável para diferentes tamanhos de tela
-• Sistema de Navegação: Menu intuitivo para acesso às diferentes seções do site
-
-<h2>✖️ Escopo (O que não é o objetivo do projeto)</h2>
-
-• Sistema de Login/Autenticação: Não há sistema de login nesta versão
-• Chat Entre Usuários: Não possui sistema de comunicação direta
-• Agendamento Online: Não permite marcação de horários pela plataforma
-• Sistema de Avaliação: Não possui sistema de feedback das monitorias
+| Funcionalidades do Projeto | Escopo (O que não é o objetivo do projeto) |
+|-----------------------------|-------------------------------------------|
+| Visualização de Monitorias: Interface com slider para apresentação das disciplinas disponíveis | Sistema de Login/Autenticação: Não há sistema de login nesta versão |
+| Gerenciamento de Disciplinas: Adição, edição e remoção de disciplinas no sistema | Chat Entre Usuários: Não possui sistema de comunicação direta |
+| Páginas Específicas: Cada disciplina possui sua própria página com informações detalhadas sobre a monitoria, sendo elas: Professor responsável, monitor responsável, dias e horários de monitoria, sala/link de acesso. | Agendamento Online: Não permite marcação de horários pela plataforma |
+| Interface Responsiva: Design adaptável para diferentes tamanhos de tela | Sistema de Avaliação: Não possui sistema de feedback das monitorias |
+| Sistema de Navegação: Menu intuitivo para acesso às diferentes seções do site | |
 
 <h2>👥 Público-Alvo</h2>
 
